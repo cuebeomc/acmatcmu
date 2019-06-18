@@ -1,0 +1,7 @@
+{
+    "data": [
+        {"data": "./Welcome", "type": "input"},
+        {"data": "<div id='title'>ACM@CMU</div> <div id='infotext'> ACM@CMU is Carnegie Mellon's student chapter of the Association for Computing Machinery, the leading premier organization for computing professionals. We are dedicated to promoting interdisciplinary computing and enabling professional development on campus. </div>", "type": "welcometext"},
+        {"data": "ls", "type": "input"},
+        {"data": "<a href='#' id='welcome'>Welcome</a> &nbsp; <a href='#' id='aboutus'>About_us</a> &nbsp; <a href='#' id='events'>Events</a> &nbsp; <a href='#' id='register'>Register</a>", "type": "links"}]
+}

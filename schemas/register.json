@@ -1,0 +1,8 @@
+{
+    "data": [
+        {"data": "./Register", "type": "input"},
+        {"data": "<div id='userprompt'>AndrewID:</div>&nbsp<div class='usertext' id='andrewid'></div>", "type": "userinput"},
+        {"data": "", "type": "andrewidres"},
+        {"data": "ls", "type": "input"},
+        {"data": "<a href='#' id='welcome'>Welcome</a> &nbsp; <a href='#' id='aboutus'>About_us</a> &nbsp; <a href='#' id='events'>Events</a> &nbsp; <a href='#' id='register'>Register</a>", "type": "links"}]
+}
