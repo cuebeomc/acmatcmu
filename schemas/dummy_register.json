@@ -1,0 +1,5 @@
+{
+    "data": [
+        {"data": "./Register", "type": "input"},
+        {"data": "<div class='title' id='header'>Registration closed</div> <div id='explanation'> Check back soon! We'll be going live with registration for HackCMU 2019 shortly.</div>", "type": "text"}]
+}

@@ -10,8 +10,18 @@ app.get('/welcome', (req, res) => {
     console.log("GET to /welcome from " + req.hostname)
 });
 
+app.get('/aboutus', (req, res) => {
+    res.sendFile(path.join(__dirname, 'schemas/aboutus.json'))
+    console.log("GET to /aboutus from " + req.hostname)
+})
+
+app.get('/events', (req, res) => {
+    console.log("GET to /events from " + req.hostname)
+})
+
+// Not supported for now; release mid-August
 app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'schemas/register.json'));
+    res.sendFile(path.join(__dirname, 'schemas/dummy_register.json'));
     console.log("GET to /register from " + req.hostname)
 });
 
