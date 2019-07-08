@@ -1,47 +1,59 @@
 body {
-    font-size: 18px;
+    height: 100%;
+    font-size: 15px;
     font-family: 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier, monospace;
     padding: 0; margin: 0;
     top: 0px;
-    background: #1a1e24;
-    display: -webkit-box; display: -ms-flexbox; display: flex;
-    -webkit-box-align: center; -ms-flex-align: center; align-items: center;
-    -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center;
-    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    background: var(--color-background);
+    overflow: scroll;
 }
  
 html {
     height: 100%;
     color: var(--color-text);
+    overflow: scroll;
 }
 :root {
+    --color-background: #1a1e24;
     --color-text: #eee;
     --color-text-subtle: #a2a2a2;
+    --color-border: #3d3d3d;
 }
 
-[data-termynal] {
+#terminal {
     min-width: 100%;
-    min-height: 100%;
     overflow: hidden;
-    height: auto;
     border-radius: 4px;
     margin-top: 60px;
-    padding: 0px 45px 35px;
+    padding: 0px 45px 100px;
     position: relative;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
 }
 
+body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
 #navbar {
+    font-size: 14px;
     display: flex;
     justify-content: space-between;
-    position: absolute;
+    position: fixed;
     color: var(--color-text-subtle);
     top: 0;
-    padding: 20px 0px;
+    padding: 20px 0px 10px 0px;
     width: 100%;
-    min-width: 60%;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
     overflow: auto;
+    z-index: 10000;
+}
+
+#navbar a {
+    color: hotpink;
+    text-decoration: none;
 }
 
 #bash {
@@ -52,7 +64,8 @@ html {
     padding-right: 20px;
 }
 
-[data-ty] {
+#input {
+    font-size: 13px;
     display: block;
     line-height: 1;
 }
@@ -87,11 +100,6 @@ html {
     }
 }
 
-a {
-    color: hotpink;
-    text-decoration: none;
-}
-
 #text {
     font-family: 'Lato', sans-serif;
     text-align: center;
@@ -103,31 +111,38 @@ a {
 
 }
 
+.container {
+    display: flex;
+    flex-flow: column;
+    min-height: calc(100vh - 80px);
+    justify-content: center;
+    align-items: center;
+}
+
 #welcometext {
-    padding: 100px 0px 30px 0px;
-    font-size: 70px;
+    padding-bottom: 30px;
+    font-size: calc(25px + 4.5vw);
 }
 
 #header {
-    padding: 20px 0px 20px 0px;
-    font-size: 50px;
+    padding: 20px 0px;
+    font-size: 35px;
 }
 
 #infotext {
     margin: 0 auto;
     font-weight: 300;
-    padding: 10px 0px 100px 0px;
-    line-height: 1.2;
-    font-size: 16px;
-    width: 50%;
+    padding: 10px 0px 0px;
+    line-height: 1.5;
+    width: calc(50% + 100px);
+    min-width: 230px;
 }
 
 #explanation {
     margin: 0 auto;
     font-weight: 300;
     padding: 10px 0px 50px 0px;
-    line-height: 1.2;
-    font-size: 16px;
+    line-height: 1.5;
     width: 75%;
 }
 
@@ -144,4 +159,82 @@ a {
     padding: 4px 0px 4px 0px;
     line-height: 1;
     display: block;
+}
+
+#footer {
+    font-size: 10px;
+    font-family: 'Lato', sans-serif;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0px;
+    bottom: 0px;
+}
+
+#learn-more-button {
+    margin-top: 40px;
+    padding: 5px 10px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+#learn-more-button:hover {
+    color: var(--color-background);
+    background-color: var(--color-text);
+    cursor: pointer;
+}
+
+#what-we-do-container {
+    width: 80%;
+    line-height: 1.4;
+    padding-bottom: 100px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.we-do {
+    padding-top: 50px;
+    width: 30vw;
+    text-align: left;
+}
+
+.we-do h2 {
+    margin: 0px 0px 5px;
+}
+
+.we-do-image i {
+    margin-right: 2px;
+}
+
+@media screen and (max-width: 800px) {
+    #terminal {
+        padding: 0px 30px 100px;
+    }
+
+    #header {
+        padding-top: 20px;
+    }
+
+    #what-we-do-container {
+        width: 95%;
+        line-height: 1.4;
+        padding-bottom: 100px;
+    }
+
+    .row {
+        flex-flow: column;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .we-do {
+        padding-top: 20px;
+        width: 100%;
+    }
 }

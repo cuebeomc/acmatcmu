@@ -11,7 +11,7 @@
  */
 
 const container = '#terminal';
-const promptText = 'guest@acmatcmu.org:~ $';
+const promptText = 'acm@cmu.org:~ $';
 const linkIds = ['welcome', 'aboutus', 'events', 'contactus', 'register'];
 const clearChars = ['c', 'l', 'e', 'a', 'r'];
 const lookupURL = 'https://apis.scottylabs.org/directory/v1/andrewID/';
@@ -26,9 +26,9 @@ class Terminal {
     constructor() {
         this.container = document.querySelector(container);
         this.pfx = `data-ty`;
-        this.typeDelay = 50;
+        this.typeDelay = 40;
         this.startDelay = 200;
-        this.lineDelay = 500;
+        this.lineDelay = 300;
         this.cursor = '▋';
         this.stalledLine = null;
         this.previousInput = '';
@@ -43,7 +43,6 @@ class Terminal {
     /* clear clears the terminal window for a fresh start. */
     clear(lines) {
         this.lines = lines;
-        this.container.setAttribute('data-termynal', '');
         this.container.innerHTML = '';
     }
 
@@ -90,7 +89,7 @@ class Terminal {
 
             line.removeAttribute(`${this.pfx}-cursor`);
         }
-
+        this.setScrollLinks();
         this.stall();
         this.validLinks = true;
     }
@@ -176,7 +175,6 @@ class Terminal {
 
         if (this.previousInput == '') {
             var elem = document.getElementById('name');
-            console.log(elem)
             elem.innerHTML = name;
         }
         this.previousInput = '';
@@ -287,8 +285,9 @@ class Terminal {
         var prompt = document.createElement('span');
 
         // set attributes and insert prompt text into span
-        combined.setAttribute('data-ty', 'input');
+        combined.setAttribute('id', 'input');
         prompt.setAttribute('id', 'prompt');
+        line.setAttribute('id', 'promptinput');
         prompt.innerHTML = promptText;
 
         // combine constructed spans
@@ -324,6 +323,21 @@ class Terminal {
         this.stalledLine = null;
     }
 
+    /**
+     * setScrollLinks sets scroll button links to scroll down to the intended div.
+     */
+    setScrollLinks() {
+        var buttons = document.getElementsByClassName('scroll-button')
+        for (let button of buttons) {
+            button.onclick = function(e) {
+                var section = $(this).attr("dest");
+                $("html, body").animate({
+                    scrollTop: $(section).position().top
+                }, 700);
+            };
+        }
+    }
+
     stall() {
         // construct spans for the stalling prompt
         var line = document.createElement('span');
@@ -332,8 +346,9 @@ class Terminal {
         var prompt = document.createElement('span');
 
         // set attributes from prompt and populate text
-        combined.setAttribute('data-ty', 'input');
+        combined.setAttribute('id', 'input');
         prompt.setAttribute('id', 'prompt');
+        line.setAttribute('id', 'promptinput');
         prompt.innerHTML = promptText;
 
         combined.appendChild(prompt);
@@ -354,23 +369,20 @@ class Terminal {
     setLinks() {
         for (let entry of linkIds) {
             var elem = document.getElementById(entry);
-            console.log(elem);
             if (elem == null) {
                 continue;
             }
             elem.onclick = function() {
                 if (terminal.validLinks == true) {
                     terminal.validLinks = false;
-                    console.log("asdf")
                     fetch('/' + entry)
                     .then(response => response.json())
                     .then(json => terminal.run(json.data))
                     .catch(err => {
                         terminal.validLinks = true;
-                        console.log(err);
                     });
                 }
-            }
+            };
         }
     }
 
