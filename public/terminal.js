@@ -12,7 +12,7 @@
 
 const container = '#terminal';
 const promptText = 'acm@cmu.org:~ $';
-const linkIds = ['welcome', 'aboutus', 'events', 'contactus', 'register'];
+const linkIds = ['welcome', 'aboutus', 'events', 'sponsors', 'contactus', 'register'];
 const clearChars = ['c', 'l', 'e', 'a', 'r'];
 const lookupURL = 'https://apis.scottylabs.org/directory/v1/andrewID/';
 
@@ -26,9 +26,9 @@ class Terminal {
     constructor() {
         this.container = document.querySelector(container);
         this.pfx = `data-ty`;
-        this.typeDelay = 40;
-        this.startDelay = 200;
-        this.lineDelay = 300;
+        this.typeDelay = 35;
+        this.startDelay = 150;
+        this.lineDelay = 150;
         this.cursor = '▋';
         this.stalledLine = null;
         this.previousInput = '';

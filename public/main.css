@@ -1,6 +1,6 @@
 body {
     height: 100%;
-    font-size: 15px;
+    font-size: 17px;
     font-family: 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier, monospace;
     padding: 0; margin: 0;
     top: 0px;
@@ -134,15 +134,6 @@ body::-webkit-scrollbar {
     font-weight: 300;
     padding: 10px 0px 0px;
     line-height: 1.5;
-    width: calc(50% + 100px);
-    min-width: 230px;
-}
-
-#explanation {
-    margin: 0 auto;
-    font-weight: 300;
-    padding: 10px 0px 50px 0px;
-    line-height: 1.5;
     width: 75%;
 }
 
@@ -175,6 +166,7 @@ body::-webkit-scrollbar {
 
 #learn-more-button {
     margin-top: 40px;
+    margin-bottom: 50px;
     padding: 5px 10px;
     border: 1px solid var(--color-border);
     color: var(--color-text);
@@ -212,6 +204,74 @@ body::-webkit-scrollbar {
     margin-right: 2px;
 }
 
+#logo-grid {
+    margin-top: 3vh;
+    display: flex;
+    width: 85%;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+#logo-grid img {
+    padding: 20px 30px;
+    height: 3.5vh;
+}
+
+img#bam {
+    height: 4vh;
+}
+
+img#bloomberg {
+    height: 4.5vh;
+}
+
+img#deshaw {
+    height: 5vh;
+}
+
+img#dropbox {
+    height: 5vh;
+}
+
+img#gm {
+    height: 10vh;
+}
+
+img#gsk {
+    height: 8vh;
+}
+
+img#google {
+    height: 7vh;
+}
+
+img#liquidnet {
+    height: 5vh;
+    width: auto;
+}
+
+img#microsoft {
+    height: 5.5vh;
+}
+
+img#nutanix {
+    height: 3vh;
+}
+
+img#oracle {
+    height: 4vh;
+}
+
+img#riotgames {
+    height: 5.5vh;
+}
+
+img#sandia {
+    height: 7.5vh;
+}
+
 @media screen and (max-width: 800px) {
     #terminal {
         padding: 0px 30px 100px;
@@ -219,6 +279,14 @@ body::-webkit-scrollbar {
 
     #header {
         padding-top: 20px;
+    }
+
+    #infotext {
+        width: 95%;
+    }
+
+    #logo-grid {
+        width: 100%;
     }
 
     #what-we-do-container {

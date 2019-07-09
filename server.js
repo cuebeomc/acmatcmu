@@ -16,9 +16,19 @@ app.get('/aboutus', (req, res) => {
 })
 
 app.get('/events', (req, res) => {
+    res.sendFile(path.join(__dirname, 'schemas/events.json'))
     console.log("GET to /events from " + req.hostname)
 })
 
+app.get('/sponsors', (req, res) => {
+    res.sendFile(path.join(__dirname, 'schemas/sponsors.json'))
+    console.log("GET to /sponsors from " + req.hostname)
+})
+
+app.get('/contactus', (req, res) => {
+    res.sendFile(path.join(__dirname, 'schemas/contactus.json'))
+    console.log("GET to /contactus from " + req.hostname)
+})
 // Not supported for now; release mid-August
 app.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, 'schemas/dummy_register.json'));

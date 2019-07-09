@@ -1,5 +1,5 @@
 {
     "data": [
-        {"data": "./About_us", "type": "input"},
-        {"data": "<div class='title' id='header'>About us!</div> <div id='explanation'> ACM@CMU is Carnegie Mellon's student chapter of the Association for Computing Machinery, the leading premier organization for computing professionals. We are dedicated to promoting interdisciplinary computing and enabling professional development on campus. </div>", "type": "text"}]
+        {"data": "cat about_us.txt", "type": "input"},
+        {"data": "<div class='container'> <div class='title' id='header'>About Us</div> <div id='infotext'> Here at ACM@CMU, we're proud of everything we do, and that is only possible with our amazing board members. Get to know our team.</div></div>", "type": "text"}]
 }

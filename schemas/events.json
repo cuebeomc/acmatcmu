@@ -1,0 +1,5 @@
+{
+    "data": [
+        {"data": "cat events.txt", "type": "input"},
+        {"data": "<div class='container'> <div class='title' id='header'>Events</div> <div id='infotext'> ACM@CMU hosts multiple major events every year, giving fun opportunities for current students to hone their skills.</div></div>", "type": "text"}]
+}
