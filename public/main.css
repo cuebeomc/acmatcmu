@@ -129,12 +129,16 @@ body::-webkit-scrollbar {
     font-size: 35px;
 }
 
-#infotext {
+.infotext {
     margin: 0 auto;
     font-weight: 300;
     padding: 10px 0px 0px;
     line-height: 1.5;
     width: 75%;
+}
+
+#questions {
+    padding-top: 30px;
 }
 
 #userprompt {
@@ -182,7 +186,7 @@ body::-webkit-scrollbar {
 #what-we-do-container {
     width: 80%;
     line-height: 1.4;
-    padding-bottom: 100px;
+    padding-bottom: 80px;
 }
 
 .row {
@@ -204,7 +208,7 @@ body::-webkit-scrollbar {
     margin-right: 2px;
 }
 
-#logo-grid {
+.grid {
     margin-top: 3vh;
     display: flex;
     width: 85%;
@@ -272,6 +276,11 @@ img#sandia {
     height: 7.5vh;
 }
 
+#events-grid img {
+    padding: 15px 30px;
+    height: 27vh;
+}
+
 @media screen and (max-width: 800px) {
     #terminal {
         padding: 0px 30px 100px;
@@ -281,7 +290,7 @@ img#sandia {
         padding-top: 20px;
     }
 
-    #infotext {
+    .infotext {
         width: 95%;
     }
 

@@ -12,7 +12,7 @@
 
 const container = '#terminal';
 const promptText = 'acm@cmu.org:~ $';
-const linkIds = ['welcome', 'aboutus', 'events', 'sponsors', 'contactus', 'register'];
+const linkIds = ['welcome', 'aboutus', 'events', 'sponsors', 'register'];
 const clearChars = ['c', 'l', 'e', 'a', 'r'];
 const lookupURL = 'https://apis.scottylabs.org/directory/v1/andrewID/';
 
@@ -372,7 +372,8 @@ class Terminal {
             if (elem == null) {
                 continue;
             }
-            elem.onclick = function() {
+            elem.onclick = function(e) {
+                e.preventDefault();
                 if (terminal.validLinks == true) {
                     terminal.validLinks = false;
                     fetch('/' + entry)

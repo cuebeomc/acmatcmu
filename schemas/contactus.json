@@ -1,5 +1,0 @@
-{
-    "data": [
-        {"data": "cat contactus.txt", "type": "input"},
-        {"data": "<div class='container'> <div class='title' id='header'>Contact Us</div> <div id='infotext'> Need a way to contact us? Email us at acm-exec@cs.cmu.edu or fill out the form below!</div></div>", "type": "text"}]
-}

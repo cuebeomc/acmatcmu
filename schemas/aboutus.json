@@ -1,5 +1,5 @@
 {
     "data": [
         {"data": "cat about_us.txt", "type": "input"},
-        {"data": "<div class='container'> <div class='title' id='header'>About Us</div> <div id='infotext'> Here at ACM@CMU, we're proud of everything we do, and that is only possible with our amazing board members. Get to know our team.</div></div>", "type": "text"}]
+        {"data": "<div class='container'> <div class='title' id='header'>About Us</div> <div class='infotext'> Here at ACM@CMU, we're proud of everything we do, and that is only possible with our amazing board members. Get to know our team.</div></div>", "type": "text"}]
 }
