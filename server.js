@@ -35,4 +35,4 @@ app.get('/register', (req, res) => {
     console.log("GET to /register from " + req.hostname)
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
