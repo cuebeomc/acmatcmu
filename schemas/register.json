@@ -1,7 +1,0 @@
-{
-    "data": [
-        {"data": "./Register", "type": "input"},
-        {"data": "<div class='title'> Welcome to HackCMU registration! </div>", "type": "header"},
-        {"data": "<div id='userprompt'>AndrewID:</div>&nbsp<div class='usertext' id='andrewid'></div>", "type": "userinput"},
-        {"data": "", "type": "andrewidres"}]
-}
