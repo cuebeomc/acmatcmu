@@ -25,7 +25,7 @@ html {
     overflow: hidden;
     border-radius: 4px;
     margin-top: 60px;
-    padding: 0px 45px 100px;
+    padding: 0px 30px 100px;
     position: relative;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
@@ -38,31 +38,153 @@ body::-webkit-scrollbar {
 
 #navbar {
     font-size: 14px;
-    display: flex;
-    justify-content: space-between;
     position: fixed;
     color: var(--color-text-subtle);
     top: 0;
-    padding: 20px 0px 10px 0px;
     width: 100%;
     background-color: var(--color-background);
     border-bottom: 1px solid var(--color-border);
     overflow: auto;
-    z-index: 10000;
+    z-index: 3;
 }
 
-#navbar a {
+#navbar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+}
+  
+#navbar li a {
     color: hotpink;
+    display: block;
+    padding: 15px 30px;
+    border-top: 1px solid var(--color-border);
     text-decoration: none;
 }
 
 #bash {
-    padding-left: 20px;
+    display: inline-block;
+    width: auto;
+    padding: 15px 20px 15px;
 }
 
 #navigation {
-    padding-right: 20px;
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
 }
+
+#menu-icon {
+    cursor: pointer;
+    float: right;
+    padding: 25px 20px 10px;
+    user-select: none;
+}
+
+#menu-icon .navicon {
+    display: block;
+    height: 2px;
+    position: relative;
+    width: 18px;
+}
+
+#menu-btn {
+    display: none;
+}
+
+#menu-icon .navicon:before,
+#menu-icon .navicon:after {
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+  
+/* menu */
+  
+#navbar #navigation {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+  
+#navbar #menu-icon .navicon {
+    background: var(--color-text-subtle);
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+}
+  
+#navbar #menu-icon .navicon:before,
+#navbar #menu-icon .navicon:after {
+    background: var(--color-text-subtle);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+  
+#navbar #menu-icon .navicon:before {
+    top: 5px;
+}
+  
+#navbar #menu-icon .navicon:after {
+    top: -5px;
+}
+  
+/* menu btn */
+  
+#navbar #menu-btn {
+    display: none;
+}
+  
+#navbar #menu-btn:checked ~ #navigation {
+    max-height: 240px;
+}
+  
+#navbar #menu-btn:checked ~ #menu-icon .navicon {
+    background: transparent;
+}
+  
+#navbar #menu-btn:checked ~ #menu-icon .navicon:before {
+    transform: rotate(-45deg);
+}
+  
+#navbar #menu-btn:checked ~ #menu-icon .navicon:after {
+    transform: rotate(45deg);
+}
+  
+#navbar #menu-btn:checked ~ #menu-icon:not(.steps) .navicon:before,
+#navbar #menu-btn:checked ~ #menu-icon:not(.steps) .navicon:after {
+    top: 0;
+}
+  
+  /* 48em = 768px */
+  
+@media screen and (min-width: 550px) {
+    #navbar li {
+        float: left;
+    }
+    #navbar li a {
+        padding: 15px 15px 15px;
+    }
+    #navbar #navigation {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+    #navbar #menu-icon {
+        display: none;
+    }
+}
+  
 
 #input {
     font-size: 13px;
@@ -281,9 +403,58 @@ img#sandia {
     height: 27vh;
 }
 
+#bio-container {
+    margin-top: 5vh;
+    display: flex;
+    width: 90%;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.bio {
+    width: 200px;
+    margin: 40px 60px;
+}
+
+.cropper {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 100%;
+}
+
+.cropper img {
+    width: 200px;
+}
+
+.bio-name {
+    font-size: 20px;
+    padding-top: 10px;
+}
+
+.bio-title {
+    font-size: 16px;
+    padding-top: 2px;
+    word-wrap: break-word;
+}
+
+#misha {
+    width: 210px;
+}
+
+#audrey {
+    width: 210px;
+}
+
+#check-later {
+    padding-bottom: 40px;
+}
+
 @media screen and (max-width: 800px) {
     #terminal {
-        padding: 0px 30px 100px;
+        padding: 0px 25px 100px;
     }
 
     #header {
@@ -292,6 +463,14 @@ img#sandia {
 
     .infotext {
         width: 95%;
+    }
+
+    #bio-container {
+        width: 100%;
+    }
+
+    .bio {
+        margin: 40px 35px;
     }
 
     #logo-grid {

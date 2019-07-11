@@ -1,5 +1,5 @@
 {
     "data": [
         {"data": "register", "type": "input"},
-        {"data": "<div class='title' id='header'>Registration closed</div> <div class='infotext'> Check back soon! We'll be going live with registration for HackCMU 2019 shortly.</div>", "type": "text"}]
+        {"data": "<div class='title' id='header'>Registration closed</div> <div class='infotext' id='check-later'> Check back soon! We'll be going live with registration for HackCMU 2019 shortly.</div>", "type": "text"}]
 }

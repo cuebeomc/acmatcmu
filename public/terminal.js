@@ -187,6 +187,8 @@ class Terminal {
                 e.preventDefault();
                 if (terminal.validLinks == true) {
                     terminal.validLinks = false;
+
+                    document.getElementById("menu-btn").checked = false;
                     fetch('/' + entry)
                     .then(response => response.json())
                     .then(json => terminal.run(json.data))
