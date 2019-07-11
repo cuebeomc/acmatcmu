@@ -444,6 +444,12 @@ img#sandia {
     width: 210px;
 }
 
+#clara {
+    width: auto;
+    height: 200px;
+    margin-left: -50px;
+}
+
 #audrey {
     width: 210px;
 }
