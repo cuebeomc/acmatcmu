@@ -1,20 +1,14 @@
 /**
  * terminal.js
- * 
- * Heavily adapted from Ines Montani's termynal.js implementation, made more interactive.
- * Changed to take jsons to load new pages after clearning.
- * 
  * please don't look at this code it really sucks ass
  *
  * @author Cuebeom Choi
- * @version 0.0.1
  */
 
 const container = '#terminal';
 const promptText = 'acm@cmu.org:~ $';
 const linkIds = ['welcome', 'aboutus', 'events', 'sponsors', 'login'];
 const clearChars = ['c', 'l', 'e', 'a', 'r'];
-const lookupURL = 'https://apis.scottylabs.org/directory/v1/andrewID/';
 
 class Terminal {
     /**
