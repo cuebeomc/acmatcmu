@@ -202,8 +202,8 @@ body::-webkit-scrollbar {
     vertical-align: middle;
 }
 
-[data-ty-cursor]:after {
-    content: attr(data-ty-cursor);
+[cursor]:after {
+    content: attr(cursor);
     font-family: monospace;
     margin-left: 0.3em;
     -webkit-animation: blink 1s infinite;
@@ -225,7 +225,7 @@ body::-webkit-scrollbar {
     }
 }
 
-#text {
+.text {
     font-family: 'Lato', sans-serif;
     text-align: center;
 }

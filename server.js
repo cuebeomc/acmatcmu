@@ -31,8 +31,4 @@ app.get('/login', (req, res) => {
     console.log("GET to /register from " + req.hostname)
 });
 
-app.get('/asdf', (req, res) => {
-    res.sendFile(path.join(__dirname, 'login'))
-});
-
 app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))

@@ -1,5 +1,387 @@
 {
     "data": [
-        {"data": "cat about_us.txt", "type": "input"},
-        {"data": "<div class='container'> <div class='title' id='header'>About Us</div> <div class='infotext'> Here at ACM@CMU, we're proud of everything we do, and that is only possible with our amazing board members. Get to know our team.</div><div id='bio-container'><div class='bio'><div class='cropper'><img id='cuebeom' src='headshots/cuebeom.png'/></div><div class='bio-name'>Cuebeom Choi</div><div class='bio-title'>President</div></div><div class='bio'><div class='cropper'><img id='misha' src='headshots/misha.jpg'/></div><div class='bio-name'>Misha Ivkov</div><div class='bio-title'>Vice President</div></div><div class='bio'><div class='cropper'><img src='headshots/ashley.jpg'/></div><div class='bio-name'>Ashley Hong</div><div class='bio-title'>Secretary</div></div><div class='bio'><div class='cropper'><img src='headshots/connie.jpg'/></div><div class='bio-name'>Connie Chau</div><div class='bio-title'>Creative Director</div></div><div class='bio'><div class='cropper'><img src='headshots/isaac.png'/></div><div class='bio-name'>Isaac McMahon</div><div class='bio-title'>Treasurer</div></div><div class='bio'><div class='cropper'><img id='clara' src='headshots/clara.jpg'/></div><div class='bio-name'>Clara Sellke</div><div class='bio-title'>Social & Public Relations Chair</div></div><div class='bio'><div class='cropper'><img id='audrey' src='headshots/audrey.png'/></div><div class='bio-name'>Audrey Tzeng</div><div class='bio-title'>Corporate Talks and Events Officer</div></div><div class='bio'><div class='cropper'><img src='headshots/dennis.jpg'/></div><div class='bio-name'>Dennis Lo</div><div class='bio-title'>Technical Infrastructure Officer</div></div></div></div></div>", "type": "text"}]
+        {
+            "type": "input",
+            "data": "cat about_us.txt"
+        },
+        {
+            "type": "text",
+            "data": [
+                {
+                    "type": "text",
+                    "attrs": {
+                        "class": "container"
+                    },
+                    "data": [
+                        {
+                            "type": "div",
+                            "attrs": {
+                                "class": "title",
+                                "id": "header"
+                            },
+                            "data": [{
+                                "type": "string",
+                                "data": "About Us"
+                            }]
+                        },
+                        {
+                            "type": "div",
+                            "attrs": {
+                                "class": "infotext"
+                            },
+                            "data": [{
+                                "type": "string",
+                                "data": "Here at ACM@CMU, we're proud of everything we do, and that is only possible with our amazing board members. Get to know our team."
+                            }]
+                        },
+                        {
+                            "type": "div",
+                            "attrs": {
+                                "id": "bio-container"
+                            },
+                            "data": [
+                                {
+                                    "type": "div",
+                                    "attrs": {
+                                        "class": "bio"
+                                    },
+                                    "data": [
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "cropper"
+                                            },
+                                            "data": [{
+                                                "type": "img",
+                                                "attrs": {
+                                                    "id": "cuebeom",
+                                                    "src": "headshots/cuebeom.png"
+                                                },
+                                                "data": []
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-name"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Cuebeom Choi"
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-title"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "President"
+                                            }]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "div",
+                                    "attrs": {
+                                        "class": "bio"
+                                    },
+                                    "data": [
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "cropper"
+                                            },
+                                            "data": [{
+                                                "type": "img",
+                                                "attrs": {
+                                                    "id": "misha",
+                                                    "src": "headshots/misha.jpg"
+                                                },
+                                                "data": []
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-name"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Misha Ivkov"
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-title"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Vice President"
+                                            }]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "div",
+                                    "attrs": {
+                                        "class": "bio"
+                                    },
+                                    "data": [
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "cropper"
+                                            },
+                                            "data": [{
+                                                "type": "img",
+                                                "attrs": {
+                                                    "id": "ashley",
+                                                    "src": "headshots/ashley.jpg"
+                                                },
+                                                "data": []
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-name"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Ashley Hong"
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-title"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Secretary"
+                                            }]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "div",
+                                    "attrs": {
+                                        "class": "bio"
+                                    },
+                                    "data": [
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "cropper"
+                                            },
+                                            "data": [{
+                                                "type": "img",
+                                                "attrs": {
+                                                    "id": "connie",
+                                                    "src": "headshots/connie.jpg"
+                                                },
+                                                "data": []
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-name"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Connie Chau"
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-title"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Creative Director"
+                                            }]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "div",
+                                    "attrs": {
+                                        "class": "bio"
+                                    },
+                                    "data": [
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "cropper"
+                                            },
+                                            "data": [{
+                                                "type": "img",
+                                                "attrs": {
+                                                    "id": "isaac",
+                                                    "src": "headshots/isaac.png"
+                                                },
+                                                "data": []
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-name"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Isaac McMahon"
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-title"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Treasurer"
+                                            }]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "div",
+                                    "attrs": {
+                                        "class": "bio"
+                                    },
+                                    "data": [
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "cropper"
+                                            },
+                                            "data": [{
+                                                "type": "img",
+                                                "attrs": {
+                                                    "id": "clara",
+                                                    "src": "headshots/clara.jpg"
+                                                },
+                                                "data": []
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-name"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Clara Sellke"
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-title"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Social & Public Relations Chair"
+                                            }]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "div",
+                                    "attrs": {
+                                        "class": "bio"
+                                    },
+                                    "data": [
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "cropper"
+                                            },
+                                            "data": [{
+                                                "type": "img",
+                                                "attrs": {
+                                                    "id": "audrey",
+                                                    "src": "headshots/audrey.png"
+                                                },
+                                                "data": []
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-name"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Audrey Tzeng"
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-title"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Corporate Talks and Events Officer"
+                                            }]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "div",
+                                    "attrs": {
+                                        "class": "bio"
+                                    },
+                                    "data": [
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "cropper"
+                                            },
+                                            "data": [{
+                                                "type": "img",
+                                                "attrs": {
+                                                    "id": "dennis",
+                                                    "src": "headshots/dennis.jpg"
+                                                },
+                                                "data": []
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-name"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Dennis Lo"
+                                            }]
+                                        },
+                                        {
+                                            "type": "div",
+                                            "attrs": {
+                                                "class": "bio-title"
+                                            },
+                                            "data": [{
+                                                "type": "string",
+                                                "data": "Technical Infrastructure Officer"
+                                            }]
+                                        }
+                                    ]
+                                }
+
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }

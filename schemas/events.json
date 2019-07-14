@@ -1,5 +1,93 @@
 {
     "data": [
-        {"data": "cat events.txt", "type": "input"},
-        {"data": "<div class='container'> <div class='title' id='header'>Events</div> <div class='infotext'> ACM@CMU hosts multiple major events every year, giving fun opportunities for current students to hone their skills. Aside from our major events, we also host info sessions, tech talks, and ice cream socials for the general CMU community.</div><div class='grid' id='events-grid'><a href='http://www.hackcmu.org'><img id='hackcmu' src='images/hackcmu.png'/></a><a href='http://www.awap2019.com'><img id='awap' src='images/awap.png'/></a><a href='http://www.hackberrypi.org'><img id='hackberrypi' src='images/hackberrypi.png'/></a></div></div>", "type": "text"}]
+        {
+            "type": "input",
+            "data": "cat events.txt"
+        },
+        {
+            "type": "text",
+            "data": [
+                {
+                    "type": "div",
+                    "attrs": {
+                        "class": "container"
+                    },
+                    "data": [
+                        {
+                            "type": "div",
+                            "attrs": {
+                                "class": "title",
+                                "id": "header"
+                            },
+                            "data": [{
+                                "type": "string",
+                                "data": "Events"
+                            }]
+                        },
+                        {
+                            "type": "div",
+                            "attrs": {
+                                "class": "infotext"
+                            },
+                            "data": [{
+                                "type": "string",
+                                "data": "ACM@CMU hosts multiple major events every year, giving fun opportunities for current students to hone their skills. Aside from our major events, we also host info sessions, tech talks, and ice cream socials for the general CMU community."
+                            }]
+                        },
+                        {
+                            "type": "div",
+                            "attrs": {
+                                "class": "grid",
+                                "id": "events-grid"
+                            },
+                            "data": [
+                                {
+                                    "type": "a",
+                                    "attrs": {
+                                        "href": "http://www.hackcmu.org"
+                                    },
+                                    "data": [{
+                                        "type": "img",
+                                        "attrs": {
+                                            "id": "hackcmu",
+                                            "src": "images/hackcmu.png"
+                                        },
+                                        "data": []
+                                    }]
+                                },
+                                {
+                                    "type": "a",
+                                    "attrs": {
+                                        "href": "http://www.awap2019.com"
+                                    },
+                                    "data": [{
+                                        "type": "img",
+                                        "attrs": {
+                                            "id": "awap",
+                                            "src": "images/awap.png"
+                                        },
+                                        "data": []
+                                    }]
+                                },
+                                {
+                                    "type": "a",
+                                    "attrs": {
+                                        "href": "http://www.hackberrypi.org"
+                                    },
+                                    "data": [{
+                                        "type": "img",
+                                        "attrs": {
+                                            "id": "hackberrypi",
+                                            "src": "images/hackberrypi.png"
+                                        },
+                                        "data": []
+                                    }]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
 }
