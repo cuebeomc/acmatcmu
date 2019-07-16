@@ -1040,7 +1040,8 @@
                                                                 "data": [{
                                                                     "type": "img",
                                                                     "attrs": {
-                                                                        "src": "logos/linkedin.png"
+                                                                        "src": "logos/linkedin.png",
+                                                                        "target": "_blank"
                                                                     },
                                                                     "data": []
                                                                 }]

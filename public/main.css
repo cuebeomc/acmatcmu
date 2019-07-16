@@ -427,11 +427,10 @@ img#sandia {
 }
 
 .card {
-    padding: 20px 20px;
     border-radius: 25px;
     display: grid;
     grid-template-columns: 1fr;
-    width: 200px;
+    width: 240px;
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-transition: all 600ms;
@@ -440,9 +439,11 @@ img#sandia {
 }
 
 .card > div {
+    padding: 20px 20px;
+    border-radius: 25px;
     grid-row-start: 1;
     grid-column-start: 1;
-    width: 100%;
+    width: 200px;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
@@ -450,6 +451,7 @@ img#sandia {
 .card .card-back {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
+    background: var(--color-card-background);
 }
 
 .card-button {
@@ -459,11 +461,13 @@ img#sandia {
 .profile:hover .card {
     -webkit-transform: rotateY(10deg);
     transform: rotateY(10deg);
+}
+
+.profile:hover .card-front {
     background: var(--color-card-background);
 }
 
 :checked + .card {
-    background: var(--color-card-background);
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg);
 }
