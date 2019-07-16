@@ -39,7 +39,7 @@ function parseJson(parent, arr) {
             }
 
             // recursively add the children's children
-            parseJson(child, elem.data)
+            parseJson(child, elem.data);
             parent.appendChild(child);
         }
     }

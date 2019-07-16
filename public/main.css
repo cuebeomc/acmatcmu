@@ -21,6 +21,7 @@ html {
     --color-text: #eee;
     --color-text-subtle: #a2a2a2;
     --color-border: #3d3d3d;
+    --color-card-background: #313945;
 }
 
 #terminal {
@@ -406,7 +407,7 @@ img#sandia {
     height: 27vh;
 }
 
-#bio-container {
+#profile-container {
     margin-top: 5vh;
     display: flex;
     width: 90%;
@@ -416,16 +417,60 @@ img#sandia {
     margin-bottom: 50px;
 }
 
-.bio {
-    width: 200px;
-    padding: 20px 20px;
+.profile {
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    cursor: pointer;
     margin: 20px 40px;
-    border-radius: 25px;
 }
 
-.bio:hover {
-    cursor: pointer;
-    background-color: #313945;
+.card {
+    padding: 20px 20px;
+    border-radius: 25px;
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 200px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 600ms;
+    transition: all 600ms;
+    z-index: 20;
+}
+
+.card > div {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    width: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.card .card-back {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.card-button {
+    display: none;
+}
+
+.profile:hover .card {
+    -webkit-transform: rotateY(10deg);
+    transform: rotateY(10deg);
+    background: var(--color-card-background);
+}
+
+:checked + .card {
+    background: var(--color-card-background);
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+}
+
+.profile:hover :checked + .card {
+    transform: rotateY(170deg);
+    -webkit-transform: rotateY(170deg);
 }
 
 .cropper {
@@ -439,28 +484,54 @@ img#sandia {
     width: 200px;
 }
 
-.bio-name {
+.profile-bio {
+    padding-top: 10px;
+    overflow: auto;
+    width: 200px;
+    height: 180px;
+    text-align: left;
+}
+
+.profile-bio::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.profile-links {
+    text-align: right;
+    height: 20px;
+}
+
+.linkedin img {
+    height: 20px;
+}
+
+.profile-name {
     font-size: 20px;
     padding-top: 10px;
 }
 
-.bio-title {
+.card-back .profile-name {
+    padding-top: 0px;
+}
+
+.profile-title {
     font-size: 16px;
     padding-top: 2px;
     word-wrap: break-word;
 }
 
-#misha {
+#misha img {
     width: 210px;
 }
 
-#clara {
+#clara img {
     width: auto;
     height: 200px;
     margin-left: -50px;
 }
 
-#audrey {
+#audrey img  {
     width: 210px;
 }
 
@@ -481,11 +552,11 @@ img#sandia {
         width: 95%;
     }
 
-    #bio-container {
+    #profile-container {
         width: 100%;
     }
 
-    .bio {
+    .profile {
         margin: 20px 15px;
     }
 
@@ -508,5 +579,21 @@ img#sandia {
     .we-do {
         padding-top: 20px;
         width: 100%;
+    }
+
+    .profile:hover .card {
+        -webkit-transform: unset;
+        transform: unset;
+    }
+    
+    :checked + .card {
+        background: var(--color-card-background);
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+    }
+    
+    .profile:hover :checked + .card {
+        transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
     }
 }

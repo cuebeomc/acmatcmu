@@ -37,346 +37,1022 @@
                         {
                             "type": "div",
                             "attrs": {
-                                "id": "bio-container"
+                                "id": "profile-container"
                             },
                             "data": [
                                 {
-                                    "type": "div",
+                                    "type": "label",
                                     "attrs": {
-                                        "class": "bio"
+                                        "class": "profile",
+                                        "id": "cuebeom"
                                     },
                                     "data": [
                                         {
+                                            "type": "input",
+                                            "attrs": {
+                                                "class": "card-button",
+                                                "type": "checkbox"
+                                            },
+                                            "data": []
+                                        },
+                                        {
                                             "type": "div",
                                             "attrs": {
-                                                "class": "cropper"
+                                                "class": "card"
                                             },
-                                            "data": [{
-                                                "type": "img",
-                                                "attrs": {
-                                                    "id": "cuebeom",
-                                                    "src": "headshots/cuebeom.png"
+                                            "data": [
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-front"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "cropper"
+                                                            },
+                                                            "data": [{
+                                                                "type": "img",
+                                                                "attrs": {
+                                                                    "src": "headshots/cuebeom.png"
+                                                                },
+                                                                "data": []
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Cuebeom Choi"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "President"
+                                                            }]
+                                                        }
+                                                    ]
                                                 },
-                                                "data": []
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-name"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Cuebeom Choi"
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-title"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "President"
-                                            }]
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-back"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Cuebeom Choi"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "President"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-bio"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Hello! My name is Cuebeom, a junior studying CS with a concentration in Systems! I love to do fun projects based on silly ideas like this website. In my free time, I enjoy playing piano and cooking."
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-links"
+                                                            },
+                                                            "data": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "type": "div",
+                                    "type": "label",
                                     "attrs": {
-                                        "class": "bio"
+                                        "class": "profile",
+                                        "id": "misha"
                                     },
                                     "data": [
                                         {
+                                            "type": "input",
+                                            "attrs": {
+                                                "class": "card-button",
+                                                "type": "checkbox"
+                                            },
+                                            "data": []
+                                        },
+                                        {
                                             "type": "div",
                                             "attrs": {
-                                                "class": "cropper"
+                                                "class": "card"
                                             },
-                                            "data": [{
-                                                "type": "img",
-                                                "attrs": {
-                                                    "id": "misha",
-                                                    "src": "headshots/misha.jpg"
+                                            "data": [
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-front"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "cropper"
+                                                            },
+                                                            "data": [{
+                                                                "type": "img",
+                                                                "attrs": {
+                                                                    "src": "headshots/misha.jpg"
+                                                                },
+                                                                "data": []
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Misha Ivkov"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Vice President"
+                                                            }]
+                                                        }
+                                                    ]
                                                 },
-                                                "data": []
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-name"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Misha Ivkov"
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-title"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Vice President"
-                                            }]
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-back"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Misha Ivkov"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Vice President"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-bio"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Hi, I'm Misha! I'm a Junior in Computer Science in the Theory Concentration. I love being a TA for various classes in the CS department and writing math problems for the CMU high school math competition, CMIMC. You'll also find me in the pool and the volleyball court during the warmer months."
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-links"
+                                                            },
+                                                            "data": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "type": "div",
+                                    "type": "label",
                                     "attrs": {
-                                        "class": "bio"
+                                        "class": "profile",
+                                        "id": "ashley"
                                     },
                                     "data": [
                                         {
+                                            "type": "input",
+                                            "attrs": {
+                                                "class": "card-button",
+                                                "type": "checkbox"
+                                            },
+                                            "data": []
+                                        },
+                                        {
                                             "type": "div",
                                             "attrs": {
-                                                "class": "cropper"
+                                                "class": "card"
                                             },
-                                            "data": [{
-                                                "type": "img",
-                                                "attrs": {
-                                                    "id": "ashley",
-                                                    "src": "headshots/ashley.jpg"
+                                            "data": [
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-front"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "cropper"
+                                                            },
+                                                            "data": [{
+                                                                "type": "img",
+                                                                "attrs": {
+                                                                    "src": "headshots/ashley.jpg"
+                                                                },
+                                                                "data": []
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Ashley Hong"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Secretary"
+                                                            }]
+                                                        }
+                                                    ]
                                                 },
-                                                "data": []
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-name"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Ashley Hong"
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-title"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Secretary"
-                                            }]
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-back"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Ashley Hong"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Secretary"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-bio"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "I'm a senior studying Computer Science with a minor in Economics. Outside of school, I enjoy reading, running, and exploring new cities."
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-links"
+                                                            },
+                                                            "data": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "type": "div",
+                                    "type": "label",
                                     "attrs": {
-                                        "class": "bio"
+                                        "class": "profile",
+                                        "id": "connie"
                                     },
                                     "data": [
                                         {
+                                            "type": "input",
+                                            "attrs": {
+                                                "class": "card-button",
+                                                "type": "checkbox"
+                                            },
+                                            "data": []
+                                        },
+                                        {
                                             "type": "div",
                                             "attrs": {
-                                                "class": "cropper"
+                                                "class": "card"
                                             },
-                                            "data": [{
-                                                "type": "img",
-                                                "attrs": {
-                                                    "id": "connie",
-                                                    "src": "headshots/connie.jpg"
+                                            "data": [
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-front"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "cropper"
+                                                            },
+                                                            "data": [{
+                                                                "type": "img",
+                                                                "attrs": {
+                                                                    "src": "headshots/connie.jpg"
+                                                                },
+                                                                "data": []
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Connie Chau"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Creative Director"
+                                                            }]
+                                                        }
+                                                    ]
                                                 },
-                                                "data": []
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-name"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Connie Chau"
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-title"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Creative Director"
-                                            }]
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-back"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Connie Chau"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Creative Director"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-bio"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Hi! My name is Connie Chau and I am a senior studying Economics, Music Harp Performance, and Human-Computer Interaction. I like drawing and eating sweets."
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-links"
+                                                            },
+                                                            "data": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "type": "div",
+                                    "type": "label",
                                     "attrs": {
-                                        "class": "bio"
+                                        "class": "profile",
+                                        "id": "isaac"
                                     },
                                     "data": [
                                         {
+                                            "type": "input",
+                                            "attrs": {
+                                                "class": "card-button",
+                                                "type": "checkbox"
+                                            },
+                                            "data": []
+                                        },
+                                        {
                                             "type": "div",
                                             "attrs": {
-                                                "class": "cropper"
+                                                "class": "card"
                                             },
-                                            "data": [{
-                                                "type": "img",
-                                                "attrs": {
-                                                    "id": "isaac",
-                                                    "src": "headshots/isaac.png"
+                                            "data": [
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-front"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "cropper"
+                                                            },
+                                                            "data": [{
+                                                                "type": "img",
+                                                                "attrs": {
+                                                                    "src": "headshots/isaac.png"
+                                                                },
+                                                                "data": []
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Isaac McMahon"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Treasurer"
+                                                            }]
+                                                        }
+                                                    ]
                                                 },
-                                                "data": []
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-name"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Isaac McMahon"
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-title"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Treasurer"
-                                            }]
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-back"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Isaac McMahon"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Treasurer"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-bio"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Hi! I'm Isaac and I'm a Junior in Physics, and I'm starting to do research in Astrophysics. You can also catch me cooking, playing music, or cleaning forgotten closets in Gates."
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-links"
+                                                            },
+                                                            "data": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "type": "div",
+                                    "type": "label",
                                     "attrs": {
-                                        "class": "bio"
+                                        "class": "profile",
+                                        "id": "clara"
                                     },
                                     "data": [
                                         {
+                                            "type": "input",
+                                            "attrs": {
+                                                "class": "card-button",
+                                                "type": "checkbox"
+                                            },
+                                            "data": []
+                                        },
+                                        {
                                             "type": "div",
                                             "attrs": {
-                                                "class": "cropper"
+                                                "class": "card"
                                             },
-                                            "data": [{
-                                                "type": "img",
-                                                "attrs": {
-                                                    "id": "clara",
-                                                    "src": "headshots/clara.jpg"
+                                            "data": [
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-front"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "cropper"
+                                                            },
+                                                            "data": [{
+                                                                "type": "img",
+                                                                "attrs": {
+                                                                    "src": "headshots/clara.jpg"
+                                                                },
+                                                                "data": []
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Clara Sellke"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Social & Public Relations Chair"
+                                                            }]
+                                                        }
+                                                    ]
                                                 },
-                                                "data": []
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-name"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Clara Sellke"
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-title"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Social & Public Relations Chair"
-                                            }]
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-back"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Clara Sellke"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Social & Public Relations Chair"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-bio"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "I'm a CS major, Math minor, and maybe a Linguistics minor. I like working out and becoming swole, baking+cooking+cutting fruit, knitting+crocheting, and dabbing. Fun fact - I can whip meringue by hand!"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-links"
+                                                            },
+                                                            "data": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "type": "div",
+                                    "type": "label",
                                     "attrs": {
-                                        "class": "bio"
+                                        "class": "profile",
+                                        "id": "audrey"
                                     },
                                     "data": [
                                         {
+                                            "type": "input",
+                                            "attrs": {
+                                                "class": "card-button",
+                                                "type": "checkbox"
+                                            },
+                                            "data": []
+                                        },
+                                        {
                                             "type": "div",
                                             "attrs": {
-                                                "class": "cropper"
+                                                "class": "card"
                                             },
-                                            "data": [{
-                                                "type": "img",
-                                                "attrs": {
-                                                    "id": "audrey",
-                                                    "src": "headshots/audrey.png"
+                                            "data": [
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-front"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "cropper"
+                                                            },
+                                                            "data": [{
+                                                                "type": "img",
+                                                                "attrs": {
+                                                                    "src": "headshots/audrey.png"
+                                                                },
+                                                                "data": []
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Audrey Tzeng"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Corporate Talks & Events Officer"
+                                                            }]
+                                                        }
+                                                    ]
                                                 },
-                                                "data": []
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-name"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Audrey Tzeng"
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-title"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Corporate Talks and Events Officer"
-                                            }]
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-back"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Audrey Tzeng"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Corporate Talks & Events Officer"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-bio"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Hi I'm Audrey and I'm a sohpmore in scs. Ask me about my birds!!"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-links"
+                                                            },
+                                                            "data": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ]
                                 },
                                 {
-                                    "type": "div",
+                                    "type": "label",
                                     "attrs": {
-                                        "class": "bio"
+                                        "class": "profile",
+                                        "id": "dennis"
                                     },
                                     "data": [
                                         {
+                                            "type": "input",
+                                            "attrs": {
+                                                "class": "card-button",
+                                                "type": "checkbox"
+                                            },
+                                            "data": []
+                                        },
+                                        {
                                             "type": "div",
                                             "attrs": {
-                                                "class": "cropper"
+                                                "class": "card"
                                             },
-                                            "data": [{
-                                                "type": "img",
-                                                "attrs": {
-                                                    "id": "dennis",
-                                                    "src": "headshots/dennis.jpg"
+                                            "data": [
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-front"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "cropper"
+                                                            },
+                                                            "data": [{
+                                                                "type": "img",
+                                                                "attrs": {
+                                                                    "src": "headshots/dennis.jpg"
+                                                                },
+                                                                "data": []
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Dennis Lo"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Technical Infrastructure Officer"
+                                                            }]
+                                                        }
+                                                    ]
                                                 },
-                                                "data": []
-                                            }]
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-back"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Dennis Lo"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Technical Infrastructure Officer"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-bio"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "I'm Dennis, a sophomore studying Information Systems and Computer Science. On any given day, you can find me coding, biking, and listening to jazz."
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-links"
+                                                            },
+                                                            "data": []
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "label",
+                                    "attrs": {
+                                        "class": "profile",
+                                        "id": "jasmine"
+                                    },
+                                    "data": [
+                                        {
+                                            "type": "input",
+                                            "attrs": {
+                                                "class": "card-button",
+                                                "type": "checkbox"
+                                            },
+                                            "data": []
                                         },
                                         {
                                             "type": "div",
                                             "attrs": {
-                                                "class": "bio-name"
+                                                "class": "card"
                                             },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Dennis Lo"
-                                            }]
-                                        },
-                                        {
-                                            "type": "div",
-                                            "attrs": {
-                                                "class": "bio-title"
-                                            },
-                                            "data": [{
-                                                "type": "string",
-                                                "data": "Technical Infrastructure Officer"
-                                            }]
+                                            "data": [
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-front"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "cropper"
+                                                            },
+                                                            "data": [{
+                                                                "type": "img",
+                                                                "attrs": {
+                                                                    "src": "headshots/jasmine.jpg"
+                                                                },
+                                                                "data": []
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Jasmine Cheng"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Membership Chair"
+                                                            }]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "type": "div",
+                                                    "attrs": {
+                                                        "class": "card-back"
+                                                    },
+                                                    "data": [
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-name"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Jasmine Cheng"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-title"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "Membership Chair"
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-bio"
+                                                            },
+                                                            "data": [{
+                                                                "type": "string",
+                                                                "data": "My name is Jasmine and I am a sophomore in SCS. I'm interested in Robotics. I dance on CMU's Bhangra team and like to cook."
+                                                            }]
+                                                        },
+                                                        {
+                                                            "type": "div",
+                                                            "attrs": {
+                                                                "class": "profile-links"
+                                                            },
+                                                            "data": [{
+                                                                "type": "a",
+                                                                "attrs": {
+                                                                    "class": "linkedin",
+                                                                    "href": "https://www.linkedin.com/in/jasmine-a-cheng/"
+                                                                },
+                                                                "data": [{
+                                                                    "type": "img",
+                                                                    "attrs": {
+                                                                        "src": "logos/linkedin.png"
+                                                                    },
+                                                                    "data": []
+                                                                }]
+                                                            }]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
-
+                                
                             ]
                         }
                     ]
