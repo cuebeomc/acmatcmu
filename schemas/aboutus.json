@@ -476,7 +476,21 @@
                                                             "attrs": {
                                                                 "class": "profile-links"
                                                             },
-                                                            "data": []
+                                                            "data": [{
+                                                                "type": "a",
+                                                                "attrs": {
+                                                                    "class": "linkedin",
+                                                                    "href": "https://www.linkedin.com/in/conniewchau",
+                                                                    "target": "_blank"
+                                                                },
+                                                                "data": [{
+                                                                    "type": "img",
+                                                                    "attrs": {
+                                                                        "src": "logos/linkedin.png"
+                                                                    },
+                                                                    "data": []
+                                                                }]
+                                                            }]
                                                         }
                                                     ]
                                                 }
@@ -1035,13 +1049,13 @@
                                                                 "type": "a",
                                                                 "attrs": {
                                                                     "class": "linkedin",
-                                                                    "href": "https://www.linkedin.com/in/jasmine-a-cheng/"
+                                                                    "href": "https://www.linkedin.com/in/jasmine-a-cheng/",
+                                                                    "target": "_blank"
                                                                 },
                                                                 "data": [{
                                                                     "type": "img",
                                                                     "attrs": {
-                                                                        "src": "logos/linkedin.png",
-                                                                        "target": "_blank"
+                                                                        "src": "logos/linkedin.png"
                                                                     },
                                                                     "data": []
                                                                 }]
