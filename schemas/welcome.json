@@ -100,7 +100,7 @@
                                                             "data": [
                                                                 {
                                                                     "type": "i",
-                                                                    "attr": {
+                                                                    "attrs": {
                                                                         "class": "fas fa-cogs fa-md"
                                                                     },
                                                                     "data": []
@@ -136,7 +136,7 @@
                                                             "data": [
                                                                 {
                                                                     "type": "i",
-                                                                    "attr": {
+                                                                    "attrs": {
                                                                         "class": "fas fa-code fa-md"
                                                                     },
                                                                     "data": []
@@ -180,7 +180,7 @@
                                                             "data": [
                                                                 {
                                                                     "type": "i",
-                                                                    "attr": {
+                                                                    "attrs": {
                                                                         "class": "fas fa-play fa-md"
                                                                     },
                                                                     "data": []
@@ -216,7 +216,7 @@
                                                             "data": [
                                                                 {
                                                                     "type": "i",
-                                                                    "attr": {
+                                                                    "attrs": {
                                                                         "class": "fas fa-star fa-md"
                                                                     },
                                                                     "data": []
