@@ -34,7 +34,7 @@ app.get('/login', (req, res) => {
     console.log("GET to /register from " + req.hostname)
 });
 
-MongoClient.connect('mongodb://<dbuser>:<dbpassword>@ds151997.mlab.com:51997/heroku_mztvh6zg', (err, database) => {
+MongoClient.connect('mongodb://dev:acmdev1@ds151997.mlab.com:51997/heroku_mztvh6zg', (err, database) => {
     if (err) return console.log(err)
     db = database.db('heroku_mztvh6zg') // whatever database name is
     app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
