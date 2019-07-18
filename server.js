@@ -3,6 +3,9 @@ const path = require('path')
 const app = express()
 const port = 3000
 
+const MongoClient = require('mongodb').MongoClient
+var db
+
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.get('/welcome', (req, res) => {
@@ -31,4 +34,8 @@ app.get('/login', (req, res) => {
     console.log("GET to /register from " + req.hostname)
 });
 
-app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
+MongoClient.connect('mongodb://<dbuser>:<dbpassword>@ds151997.mlab.com:51997/heroku_mztvh6zg', (err, database) => {
+    if (err) return console.log(err)
+    db = database.db('heroku_mztvh6zg') // whatever database name is
+    app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
+})
