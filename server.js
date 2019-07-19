@@ -1,7 +1,10 @@
 const express = require('express')
 const path = require('path')
+const bodyParser= require('body-parser')
 const app = express()
 const port = 3000
+
+app.use(bodyParser.urlencoded({extended: true}))
 
 const MongoClient = require('mongodb').MongoClient
 var db
@@ -30,7 +33,7 @@ app.get('/sponsors', (req, res) => {
 
 // Not supported for now; release mid-August
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'schemas/dummy_register.json'));
+    res.sendFile(path.join(__dirname, 'login/index.html')); //does not clear the screen and show index !
     console.log("GET to /register from " + req.hostname)
 });
 
@@ -39,3 +42,9 @@ MongoClient.connect('mongodb://dev:acmdev1@ds151997.mlab.com:51997/heroku_mztvh6
     db = database.db('heroku_mztvh6zg') // whatever database name is
     app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
 });
+
+app.post('/test', (req, res) => {
+    console.log(req.body)
+  });
+
+
