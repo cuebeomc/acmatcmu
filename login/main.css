@@ -1,0 +1,43 @@
+html {
+    height: 100%;
+    color: var(--color-text);
+    overflow: scroll;
+}
+
+body {
+    height: 100%;
+    font-size: 17px;
+    font-family: 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier, monospace;
+    padding: 0; margin: 0;
+    top: 0px;
+    background: var(--color-background);
+    overflow: scroll;
+}
+
+:root {
+    --color-background: #1a1e24;
+    --color-text: #eee;
+    --color-text-subtle: #a2a2a2;
+    --color-border: #3d3d3d;
+    --color-card-background: #313945;
+}
+
+.container {
+    display: flex;
+    flex-flow: column;
+    min-height: calc(100vh - 80px);
+    justify-content: center;
+    align-items: center;
+}
+
+#footer {
+    font-size: 10px;
+    font-family: 'Lato', sans-serif;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0px;
+    bottom: 0px;
+}

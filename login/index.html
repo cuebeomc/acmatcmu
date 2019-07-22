@@ -1,6 +1,33 @@
-<form action="/test" method="POST">
-    <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="quote" name="quote">
-    <a href="/auth/google">Sign In with Google</a>
-    <button type="submit">Submit</button>
-</form>
+<!doctype html>
+<html lang='en'>
+    <head>
+        <title>ACM@CMU</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset='utf-8'>
+        <link rel='stylesheet' href='main.css'>
+        <link href='https://fonts.googleapis.com/css?family=Lato:300:100|Montserrat:300|Fira+Mono' rel='stylesheet'>
+        <script src="https://kit.fontawesome.com/a846ca303b.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id='navbar'>
+            <div id='bash'><a href='/'>ACM@CMU</a></div>
+            <input id="menu-btn" type="checkbox" id="menu-btn" />
+            <label id="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+            <ul id='navigation'>
+                <li></li>
+            </ul>
+
+        </div>
+        <div class="container">
+            <form action="/test" method="POST">
+                <input type="text" placeholder="name" name="name">
+                <input type="text" placeholder="quote" name="quote">
+                <a href="/auth/google">Sign In with Google</a>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <div id='footer'> © 2019 ACM@CMU. </div>
+    </body>
+</html>

@@ -6,10 +6,27 @@ const port = 3000
 
 app.use(bodyParser.urlencoded({extended: true}))
 
-const MongoClient = require('mongodb').MongoClient
+//const MongoClient = require('mongodb').MongoClient
 var db
+var mongoose = require('mongoose')
 
 var passport = require('passport');
+var expressSession = require('express-session')
+app.use(expressSession({secret: 'mySecretKey'}))
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+ 
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 passport.use(new GoogleStrategy({
@@ -72,11 +89,13 @@ app.get('/login', (req, res) => {
     console.log("GET to /login from " + req.hostname)
 });
 
-MongoClient.connect('mongodb://dev:acmdev1@ds151997.mlab.com:51997/heroku_mztvh6zg', (err, database) => {
+mongoose.connect('mongodb://dev:acmdev1@ds151997.mlab.com:51997/heroku_mztvh6zg', (err, database) => {
     if (err) return console.log(err)
     db = database.db('heroku_mztvh6zg') // whatever database name is
-    app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
+    
 });
+
+app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
 
 app.post('/test', (req, res) => {
     console.log(req.body)
