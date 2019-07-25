@@ -162,6 +162,13 @@
                                         "src": "images/sandia.svg"
                                     },
                                     "data": []
+                                },{
+                                    "type": "img",
+                                    "attrs": {
+                                        "id": "scm",
+                                        "src": "images/scm.png"
+                                    },
+                                    "data": []
                                 }
                             ]
                         }

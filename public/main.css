@@ -398,6 +398,10 @@ img#sandia {
     height: 7.5vh;
 }
 
+img#scm {
+    height: 11vh;
+}
+
 #events-grid img {
     padding: 15px 30px;
     height: 27vh;
