@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const findOrCreate = require('mongoose-findorcreate');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -11,6 +12,8 @@ const UserSchema = new Schema({
     t_size: { type: String, default: '' },
     resume: { type: String }
 });
+
+UserSchema.plugin(findOrCreate);
 
 UserSchema.method({});
 

@@ -6,6 +6,7 @@
 
 const login = require('../app/controllers/login');
 const path = require('path');
+const config = require('./');
 /**
  * Expose
  */
@@ -33,6 +34,20 @@ module.exports = function (app, passport) {
 
 
   app.get('/login', login.index);
+
+  app.get('/auth/google', (req, res, next) => {
+    if (!req.user) {
+      passport.authenticate('google', { scope: config.google.scope, successRedirect: '/aboutus' })(req,res,next);
+    } else {
+      next();
+    }
+  });
+
+  app.get('/auth/google/callback', 
+    passport.authenticate('google', { failureRedirect: '/login' }),
+    function(req, res) {
+      res.redirect('/');
+  });
 
   app.get('/logout', (req, res) => {
     req.logout();

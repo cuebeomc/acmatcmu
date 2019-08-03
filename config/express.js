@@ -73,6 +73,19 @@ module.exports = function(app, passport) {
     app.use(passport.initialize());
     app.use(passport.session());
 
+    // app.use(function(req,res,next) {
+    //     if (!req.user) {
+    //         passport.authenticate(
+    //             'google', {
+    //                 scope: config.google.scope,
+    //                 successRedirect: '/aboutus'
+    //             }
+    //         )(req,res,next);
+    //     } else {
+    //         next();
+    //     }
+    // })
+
     app.use(flash());
 
 }

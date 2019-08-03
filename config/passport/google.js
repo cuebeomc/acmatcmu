@@ -5,9 +5,9 @@ const User = mongoose.model('User');
 
 console.log(config.google.callbackURL);
 module.exports = new GoogleStrategy({
-    clientID: '799612153838-k46hmt1v7l477vkaalprjpg910bqjibc.apps.googleusercontent.com',
-    clientSecret: 'jSVCNQ99MkNaS1UI0dwYyQh2',
-    callbackURL: "https://acmatcmu-dev.herokuapp.com/auth/google/callback",
+  clientID: config.google.clientID,
+  clientSecret: config.google.clientSecret,
+  callbackURL: config.google.callbackURL,
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({
