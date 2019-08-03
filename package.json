@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "./node_modules/.bin/cross-env NODE_ENV=development ./node_modules/.bin/nodemon server.js",
-    "prod": "node server.js"
+    "dev": "./node_modules/.bin/cross-env NODE_ENV=development ./node_modules/.bin/nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Cuebeom Choi",
   "license": "ISC",
