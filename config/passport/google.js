@@ -7,7 +7,7 @@ console.log(config.google.callbackURL);
 module.exports = new GoogleStrategy({
     clientID: '799612153838-k46hmt1v7l477vkaalprjpg910bqjibc.apps.googleusercontent.com',
     clientSecret: 'jSVCNQ99MkNaS1UI0dwYyQh2',
-    callbackURL: "http://acmatcmu-dev.herokuapp.com/auth/google/callback",
+    callbackURL: "https://acmatcmu-dev.herokuapp.com/auth/google/callback",
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate({

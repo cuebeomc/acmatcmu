@@ -13,22 +13,22 @@ const path = require('path');
 module.exports = function (app, passport) {
   app.get('/welcome', (req, res) => {
     res.sendFile(path.join(__dirname, '../app/views/schemas/welcome.json'));
-    console.log("GET to /welcome from " + req.hostname)
+    // console.log("GET to /welcome from " + req.hostname)
   });
 
   app.get('/aboutus', (req, res) => {
     res.sendFile(path.join(__dirname, '../app/views/schemas/aboutus.json'))
-    console.log("GET to /aboutus from " + req.hostname)
+    // console.log("GET to /aboutus from " + req.hostname)
   });
 
   app.get('/events', (req, res) => {
       res.sendFile(path.join(__dirname, '../app/views/schemas/events.json'))
-      console.log("GET to /events from " + req.hostname)
+      // console.log("GET to /events from " + req.hostname)
   });
 
   app.get('/sponsors', (req, res) => {
       res.sendFile(path.join(__dirname, '../app/views/schemas/sponsors.json'))
-      console.log("GET to /sponsors from " + req.hostname)
+      // console.log("GET to /sponsors from " + req.hostname)
   });
 
 

@@ -26,7 +26,10 @@ module.exports = function(app, passport) {
 
     app.use(express.static(config.root + '/public'))
 
-    // if (env !== 'test') app.use(morgan(log));
+    let log;
+    log = 'dev';
+
+    if (env !== 'test') app.use(morgan(log));
 
     app.set('views', config.root + '/app/views');
     app.set('view engine', 'pug');
