@@ -85,7 +85,6 @@ class Terminal {
             const type = entry.type;
             const data = entry.data;
 
-            console.log(entry)
             if (type == 'input') {
                 line.setAttribute(`cursor`, cursor);
 
@@ -94,7 +93,6 @@ class Terminal {
             } else if (type == 'text') {
                 line.setAttribute('class', type);
                 parseJson(line, data);
-                console.log(line)
 
                 this.container.appendChild(line);
                 await wait(lineDelay);

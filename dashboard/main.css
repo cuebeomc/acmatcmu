@@ -1,0 +1,185 @@
+:root {
+    --color-background: #f5f5f5;
+    --color-highlight: #FCD20C;
+    --color-dark-highlight: #D8B30E;
+    --color-dark-text: rgba(27, 27, 27);
+}
+
+html {
+    background-color: var(--color-background);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+}
+
+body {
+    margin: 0;
+}
+
+#container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+#main {
+    margin-bottom: 30px;
+    min-width: 850px;
+    width: 850px;
+    height: 650px;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2), 0 9px 30px 0 rgba(0, 0, 0, 0.19);
+    display: flex;
+    overflow: hidden;
+}
+
+h2 {
+    margin: 0;
+    font-weight: 300;
+    font-size: 21px;
+}
+
+p {
+    margin: 0;
+}
+
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--color-highlight);
+    width: 15%;
+}
+
+.nav-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: black;
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+}
+
+.nav-icon:hover {
+    cursor: pointer;
+    background-color: var(--color-dark-highlight);
+}
+
+.icon {
+    height: 29px;
+    margin-top: 5px;
+}
+
+#logo {
+    margin: auto;
+    width: 200px;
+}
+.caret {
+    margin-top: -15px;
+}
+
+#main-body {
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    width: 70%;
+    margin: auto;
+}
+
+input, option {
+    font-weight: 300;
+    color: var(--color-dark-text);
+}
+
+.input {
+    font-size: 16px;
+}
+
+.select {
+    margin-bottom: 10px;    
+}
+
+.select > label {
+    padding-right: 7px;
+}
+
+#upload {
+    padding-bottom: 10px;
+}
+
+#role {
+    margin-bottom: 10px;
+}
+
+.edit-button {
+    width: 15px;
+}
+
+#download-icon {
+    padding-left: 5px;
+    width: 20px;
+    color: var(--color-dark-text);
+}
+
+#resume-name {
+    display: inline-block;
+}
+
+@media screen and (max-width: 900px) {
+    #container {
+        margin: 0;
+        height: 100vh;
+    }
+
+    #main {
+        min-width: 100%;
+        width: 100%;
+        height: auto;
+        border-radius: 0px;
+        box-shadow: none;
+        margin: 0;
+        display: block;
+        overflow: scroll;
+        padding-bottom: 50px;
+    }
+
+    #sidebar {
+        flex-direction: row;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        height: 80px;
+    }
+
+    .nav-icon {
+        border-radius: 0px;
+    }
+    .nav-icon:hover {
+        background-color: inherit;
+    }
+
+    #main-body {
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .form {
+        width: 60%;
+        margin: auto;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    .form {
+        width: 80%;
+    }
+}
