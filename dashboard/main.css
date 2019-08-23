@@ -3,6 +3,7 @@
     --color-highlight: #FCD20C;
     --color-dark-highlight: #D8B30E;
     --color-dark-text: rgba(27, 27, 27);
+    --color-light-text: rgb(170, 170, 170);
 }
 
 html {
@@ -37,7 +38,7 @@ body {
 h2 {
     margin: 0;
     font-weight: 300;
-    font-size: 21px;
+    font-size: 18px;
 }
 
 p {
@@ -50,7 +51,7 @@ p {
     justify-content: space-evenly;
     align-items: center;
     background-color: var(--color-highlight);
-    width: 15%;
+    width: 14%;
 }
 
 .nav-icon {
@@ -59,8 +60,8 @@ p {
     align-items: center;
     flex-direction: column;
     color: black;
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 15px;
 }
 
@@ -92,6 +93,43 @@ p {
 .form {
     width: 70%;
     margin: auto;
+}
+
+#login {
+    width: 50%;
+}
+
+#forgot-password {
+    font-size: 12px;
+}
+
+#forgot-password:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#sign-up-message {
+    text-align: center;
+    color: #5f5f5f;
+}
+
+#sign-up {
+    display: inline-block;
+    color: var(--color-dark-text);
+}
+
+#sign-up:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#error-message {
+    color: red;
+    padding-bottom: 8px;
+}
+
+#login-button {
+    width: 100%;
 }
 
 input, option {
@@ -133,6 +171,40 @@ input, option {
     display: inline-block;
 }
 
+.strike {
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap; 
+    padding-top: 20px;
+    padding-bottom: 15px;
+}
+
+.strike > span {
+    position: relative;
+    display: inline-block;
+}
+
+.strike > span:before,
+.strike > span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: var(--color-light-text);
+}
+
+.strike > span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.strike > span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
 @media screen and (max-width: 900px) {
     #container {
         margin: 0;
@@ -156,10 +228,11 @@ input, option {
         width: 100%;
         position: absolute;
         bottom: 0;
-        height: 80px;
+        height: 70px;
     }
 
     .nav-icon {
+        width: 50vw;
         border-radius: 0px;
     }
     .nav-icon:hover {
@@ -181,5 +254,9 @@ input, option {
 @media screen and (max-width: 700px) {
     .form {
         width: 80%;
+    }
+    
+    #login {
+        width: 75%;
     }
 }

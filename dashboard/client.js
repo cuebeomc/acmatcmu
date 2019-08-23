@@ -2,6 +2,129 @@
  * client.js
  */
 
+/*
+ ************************
+ *      Login flow      *
+ ************************
+ */
+
+/**
+ * getLoginUI gets the set of inputs that start the login flow.
+ */
+function getLoginUI() {
+    fetch('/api/login', {
+        method: 'GET'
+    }).then(response => response.text())
+    .then(res => {
+        var mainBody = document.getElementById('main-body');
+        mainBody.innerHTML = res;
+    });
+    selectIcon('home');
+}
+
+/**
+ * loginUser logs in the user into firebase auth.
+ * @param {event} e - the default event of submitting a form
+ * 
+ */
+function loginUser(e) {
+    e.preventDefault()
+
+    var email = document.getElementById('login-email').value;
+    var password = document.getElementById('login-password').value;
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessageDiv = document.getElementById('error-message');
+
+        console.log(error)
+        switch(errorCode) {
+            case 'auth/invalid-email':
+                errorMessageDiv.innerHTML = 'Invalid email.';
+                return;
+            case 'auth/user-disabled':
+                errorMessageDiv.innerHTML = 'This user has been disabled.';
+                return;
+            case 'auth/user-not-found':
+                errorMessageDiv.innerHTML = 'This user cannot be found.';
+                return;
+            case 'auth/wrong-password':
+                errorMessageDiv.innerHTML = 'Wrong password. Please try again';
+                return;
+            default:
+                errorMessageDiv.innerHTML = 'Unknown error occured.';
+                return;
+        };
+    });
+}
+
+/**
+ * showSignUp shows the signup page.
+ */
+function getSignUpUI() {
+    fetch('/api/signUp', {
+        method: 'GET'
+    }).then(response => response.text())
+    .then(res => {
+        var mainBody = document.getElementById('main-body');
+        mainBody.innerHTML = res;
+    });
+    selectIcon('home');
+}
+
+/**
+ * signUpUser signs up the user with the given email and password.
+ * @param {event} e - the default event of submitting a form
+ * 
+ */
+function signUpUser(e) {
+    e.preventDefault()
+
+    var email = document.getElementById('login-email').value;
+    var password = document.getElementById('login-password').value;
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessageDiv = document.getElementById('error-message');
+
+        console.log(error)
+        switch(errorCode) {
+            case 'auth/email-already-in-use':
+                errorMessageDiv.innerHTML = 'This email is already associated with an account.';
+                return;
+            case 'auth/invalid-email':
+                errorMessageDiv.innerHTML = 'This email is invalid.';
+                return;
+            case 'auth/operation-not-allowed':
+                errorMessageDiv.innerHTML = 'This shouldn\'t happen... Contact acm-exec@cs.cmu.edu.';
+                return;
+            case 'auth/weak-password':
+                errorMessageDiv.innerHTML = 'This password is too weak. The password should be at least 6 characters.';
+                return;
+            default:
+                errorMessageDiv.innerHTML = 'Unknown error occured.';
+                return;
+        };
+    });
+}
+
+/**
+ * signOut signs out the user and directs them back to the beginning.
+ */
+function signOut() {
+    firebase.auth().signOut().then(function() {
+        getLoginUI();
+    }).catch(function(err) {
+        console.log(err)
+    });
+}
+
+/*
+ *************************
+ *      Auth helper      *
+ *************************
+ */
+
 /**
  * sendAuthReq is a wrapper to send authenticated requests for API endpoints
  * that require authentication. 
@@ -34,6 +157,13 @@ function sendAuthReq(method, url, body) {
     });
 }
 
+
+/*
+ **********************************
+ *     Dashboard/home UI flow     *
+ **********************************
+ */
+
 /**
  * selectIcon highlights the icon with the given iconId.
  * 
@@ -65,6 +195,12 @@ function getStatus() {
 
     selectIcon('home');
 }
+
+/*
+ *****************************
+ *      Profile UI flow      *
+ *****************************
+ */
 
 /**
  * getProfile gets the profile for the current user or gets the form to create
@@ -126,6 +262,7 @@ function setProfile(e) {
     .then(function(res) {
         getStatus();
     }).catch(function(err) {
+        console.log(err);
     })
 }
 
@@ -161,34 +298,9 @@ function enableEdit() {
 window.onload = function() {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
-            getStatus()
+            getStatus();
         } else {
-            var uiConfig = {
-                callbacks: {
-                    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-                        return false;
-                    }
-                },
-                signInOptions: [
-                    // Leave the lines as is for the providers you want to offer your users.
-                    {
-                        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                        requireDisplayName: false,
-                    },
-                    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-                ],
-                credentialHelper: firebaseui.auth.CredentialHelper.NONE
-            };
-
-            var mainBody = document.getElementById('main-body');
-            mainBody.innerHTML = '<div id="firebaseui-auth-container"></div>';
-            
-    
-            // Initialize the FirebaseUI Widget using Firebase.
-            var ui = new firebaseui.auth.AuthUI(firebase.auth());
-            // The start method will wait until the DOM is loaded.
-            ui.start('#firebaseui-auth-container', uiConfig);
+            getLoginUI();
         }
     });
 }

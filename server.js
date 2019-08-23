@@ -7,6 +7,8 @@ const ejs = require('ejs');
 const app = express();
 const port = 3000;
 
+const andrewDomain = 'andrew.cmu.edu';
+
 var storage = multer.memoryStorage();
 var upload = multer({ 
     storage: storage,
@@ -46,6 +48,20 @@ async function authenticate(req, res, next) {
     try {
         const decodedIdToken = await admin.auth().verifyIdToken(idToken);
         req.user = decodedIdToken;
+
+        var email = req.user.email;
+        var domain = email.replace(/.*@/, "");
+
+        if (domain != andrewDomain) {
+            res.status(403).sendFile(path.join(__dirname, 'schemas/error-pages/wrong-email-domain.html'));
+            return;
+        }
+
+        if (!req.user.email_verified) {
+            res.sendFile(path.join(__dirname, 'schemas/status/verify-andrewid.html'));
+            return;
+        }
+
         next();
         return;
     } catch(e) {
@@ -55,7 +71,12 @@ async function authenticate(req, res, next) {
     }
 }
 
-// Define all routes for the homepage.
+/**
+ *********************************
+ *        HOMEPAGE ROUTES        *
+ *********************************
+ */
+
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.get('/welcome', (req, res) => {
@@ -83,25 +104,44 @@ app.get('/sponsors', (req, res) => {
     console.log("GET to /sponsors from " + req.hostname)
 });
 
+
 /**
- * /dashboard is for the "home" page of the login system
+ ********************************
+ *       DASHBOARD ROUTES       *
+ ********************************
+ */
+
+/**
+ * GET /dashboard is for the "home" page of the login system
  */
 app.use('/dashboard', express.static(path.join(__dirname, 'dashboard')));
+
+
+/**
+ * GET /api/login responds with the UI for the login prompt.
+ */
+app.get('/api/login', (req, res) => {
+    console.log('GET to /api/login');
+    res.sendFile(path.join(__dirname, 'schemas/status/login-ui.html'));
+});
+
+/**
+ * GET /api/signup responds with the UI for the signup prompt.
+ */
+app.get('/api/signUp', (req, res) => {
+    console.log('GET to /api/signUp');
+    res.sendFile(path.join(__dirname, 'schemas/status/signup-ui.html'));
+});
 
 /**
  * GET /api/status responds with the correct page depending on how far the
  * user is into the registration. requires authentication.
  */
 app.get('/api/status', authenticate, (req, res) => {
-    console.log('GET to /api/status')
+    console.log('GET to /api/status');
     var docRef = firestore.collection('users').doc(req.user.uid);
     docRef.get().then(documentSnapshot => {
         if (documentSnapshot.exists) {
-            var doc = documentSnapshot.data()
-            if (doc.isAndrewIDVerified != true) {
-                res.sendFile(path.join(__dirname, 'schemas/status/verify-andrewid.html'))
-                return;
-            }
             res.sendFile(path.join(__dirname, 'schemas/status/register-event.html'));
             return;
         }
@@ -118,17 +158,16 @@ app.get('/api/status', authenticate, (req, res) => {
  * user data that the user can then choose to edit
  */
 app.get('/api/profile', authenticate, (req, res) => {
-    console.log('GET to /api/profile')
+    console.log('GET to /api/profile');
     var docRef = firestore.collection('users').doc(req.user.uid);
+
     docRef.get().then(documentSnapshot => {
         if (documentSnapshot.exists) {
             var doc = documentSnapshot.data()
             var data = {
                 name: doc.name,
-                andrewid: doc.andrewID,
                 year: doc.classYear,
                 size: doc.shirtSize,
-                isAndrewIDVerified: doc.isAndrewIDVerified
             }
 
             if (doc.resumeName != null) {
@@ -138,7 +177,6 @@ app.get('/api/profile', authenticate, (req, res) => {
                 data.resumeExists = false;
             }
 
-            //res.send({ data: data, html: path.join(__dirname, 'schemas/profile/edit-profile.html')});
             ejs.renderFile(path.join(__dirname, 'schemas/profile/edit-profile.ejs'), data, (err, str) => {
                 if (err) {
                     console.log(err);
@@ -147,8 +185,6 @@ app.get('/api/profile', authenticate, (req, res) => {
                     res.send(str)
                 }
             })
-
-            //res.sendFile(path.join(__dirname, 'schemas/profile/edit-profile.html'));
         }
         else {
             res.sendFile(path.join(__dirname, 'schemas/profile/create-profile.html'));
@@ -198,10 +234,10 @@ function uploadFile (req, res) {
 function isIn(arr, str) {
     for (const year of arr) {
         if (year == str) {
-            return true
+            return true;
         }
     }
-    return false
+    return false;
 }
 
 /**
@@ -216,18 +252,21 @@ function isIn(arr, str) {
  *     their profile will no longer change their andrewID.
  */
 app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => {
-    console.log('POST to /api/profile')
+    console.log('POST to /api/profile');
 
     // validate data
-    if ( req.body.name == '' || req.body.andrewid == '' 
-      || !isIn(validYears, req.body.year) || !isIn(shirtSizes, req.body.size)) {
+    if ( req.body.name == '' || !isIn(validYears, req.body.year) || !isIn(shirtSizes, req.body.size)) {
         res.status(400).send('Bad request: invalid form data');
-        return
+        return;
     }
+
+    var email = req.user.email;
+    var andrewID = email.replace(/@.*$/,"");
 
     // baseline data that gets sent with every request
     var data = {
         name: req.body.name,
+        andrewID: andrewID,
         classYear: req.body.year,
         shirtSize: req.body.size,
         role: 'participant'
@@ -236,23 +275,7 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
     // now we check the database for the user's data
     userData.doc(req.user.uid).get()
     .then(documentSnapshot => {
-
-        // if the document for the user exists
-        if (documentSnapshot.exists) {
-
-            // and if they have not verified andrewID, we allow
-            // them to change their andrewID
-            var doc = documentSnapshot.data()
-            if (doc.isAndrewIDVerified != true) {
-                data.andrewID = req.body.andrewid;
-                data.isAndrewIDVerified = false;
-            }
-
-        } else {
-            // if no data exists, they can set freely.
-            data.andrewID = req.body.andrewid;
-            data.isAndrewIDVerified = false;
-        }
+        data.andrewID = req.body.andrewid;
 
         // if a file exists
         if (req.file) {
@@ -279,7 +302,7 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
         // if the user does not have user data, there may not exist a resume name/
         // resume stored backend, since we do not require an upload of the resume.
 
-        // once again, if the user has a document
+        // if the user has a document
         if (documentSnapshot.exists) {
             // we UPDATE data, not set data, since user may not have updated resume
             userData.doc(req.user.uid).update(data)
@@ -304,7 +327,18 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
     }).catch(err => {
         console.log(err);
         res.status(500).send('Internal server error');
-    })
+    });
 });
 
-app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`))
+/**
+ *******************************
+ *       User Management       *
+ *******************************
+ */
+
+app.get('/usermgmt', (req, res) => {
+    // have to handle multiple queries
+    res.send('asdf');
+});
+
+app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`));
