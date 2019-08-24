@@ -1,7 +1,9 @@
 <div id="login">
 
-    <h2>Login to your ACM@CMU dashboard.</h2>
-    <form onsubmit="loginUser(event)">
+    <h2>Sign up to register for our events.</h2>
+    <p>You must sign up with your Andrew email (andrew.cmu.edu)!<bo</p>
+
+    <form onsubmit="signUpUser(event)">
         <div id="login-fields">
             <div class="input-field">
                 <input type="email" id="login-email">
@@ -13,16 +15,10 @@
             </div>
         </div>
 
-        <div id="forgot-password" onclick="getForgotPasswordUI()">Forgot password?</div>
+        <div class="nav-message" onclick="getLoginUI()">< Back</div>
         <div id="error-message">&nbsp;</div>
 
-        <button type="submit" id="login-button" class="btn">Login</button>
-    </form>
+        <button type="submit" id="login-button" class="btn">Sign up</button>
 
-    <div class="strike">
-        <span>OR</span>
-    </div>
-    <div id="sign-up-message">
-        <div id="sign-up" onclick="getSignUpUI()">Sign up</div> to register for our events.
-    </div>
+    </form>
 </div>

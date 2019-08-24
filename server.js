@@ -77,7 +77,7 @@ async function authenticate(req, res, next) {
  *********************************
  */
 
-app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'public/homepage')));
 
 app.get('/welcome', (req, res) => {
     res.sendFile(path.join(__dirname, 'schemas/homepage/welcome.json'));
@@ -114,24 +114,7 @@ app.get('/sponsors', (req, res) => {
 /**
  * GET /dashboard is for the "home" page of the login system
  */
-app.use('/dashboard', express.static(path.join(__dirname, 'dashboard')));
-
-
-/**
- * GET /api/login responds with the UI for the login prompt.
- */
-app.get('/api/login', (req, res) => {
-    console.log('GET to /api/login');
-    res.sendFile(path.join(__dirname, 'schemas/status/login-ui.html'));
-});
-
-/**
- * GET /api/signup responds with the UI for the signup prompt.
- */
-app.get('/api/signUp', (req, res) => {
-    console.log('GET to /api/signUp');
-    res.sendFile(path.join(__dirname, 'schemas/status/signup-ui.html'));
-});
+app.use('/dashboard', express.static(path.join(__dirname, 'public/dashboard')));
 
 /**
  * GET /api/status responds with the correct page depending on how far the
@@ -146,7 +129,7 @@ app.get('/api/status', authenticate, (req, res) => {
             return;
         }
         else {
-            res.sendFile(path.join(__dirname, 'schemas/status/set-profile.html'));
+            res.sendFile(path.join(__dirname, 'schemas/profile/set-profile.html'));
             return;
         }
     });
@@ -275,8 +258,6 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
     // now we check the database for the user's data
     userData.doc(req.user.uid).get()
     .then(documentSnapshot => {
-        data.andrewID = req.body.andrewid;
-
         // if a file exists
         if (req.file) {
             // first, we validate the file type
@@ -331,14 +312,66 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
 });
 
 /**
- *******************************
- *       User Management       *
- *******************************
+ ***********************************
+ *    User Management UI + flow    *
+ ***********************************
  */
 
-app.get('/usermgmt', (req, res) => {
-    // have to handle multiple queries
-    res.send('asdf');
+
+/**
+ * GET /usermgmt handles user management (the link that verifies email,
+ * recover email, forgot password). We don't handle this backend and let
+ * the client handle it instead.
+ */
+app.use('/usermgmt', express.static(path.join(__dirname, 'public/user-mgmt')));
+
+/**
+ * GET /api/redirect sends the redirect UI.
+ */
+app.get('/api/redirect', (req, res) => {
+    console.log('GET to /redirect')
+    res.sendFile(path.join(__dirname, 'schemas/login/redirect-ui.html'));
+});
+
+/**
+ * GET /api/login responds with the UI for the login prompt.
+ */
+app.get('/api/login', (req, res) => {
+    console.log('GET to /api/login');
+    res.sendFile(path.join(__dirname, 'schemas/login/login-ui.html'));
+});
+
+/**
+ * GET /api/signup responds with the UI for the signup prompt.
+ */
+app.get('/api/signUp', (req, res) => {
+    console.log('GET to /api/signUp');
+    res.sendFile(path.join(__dirname, 'schemas/login/signup-ui.html'));
+});
+
+/**
+ * GET /api/forgotPassword sends the forgotPassword UI.
+ */
+app.get('/api/forgotPassword', (req, res) => {
+    console.log('GET to /forgotPassword')
+    res.sendFile(path.join(__dirname, 'schemas/login/forgot-password-ui.html'));
+});
+
+/**
+ * GET /api/resetPassword sends the resetPassword UI.
+ */
+app.get('/api/resetPassword', (req, res) => {
+    console.log('GET to /resetPassword')
+    res.sendFile(path.join(__dirname, 'schemas/login/reset-password-ui.html'));
+});
+
+/**
+ * GET /api/emailSent sends the messages that shows that the verification email
+ * has been sent.
+ */
+app.get('/api/emailSent', (req, res) => {
+    console.log('GET to /emailSent')
+    res.sendFile(path.join(__dirname, 'schemas/status/email-sent.html'));
 });
 
 app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`));

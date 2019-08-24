@@ -99,11 +99,11 @@ p {
     width: 50%;
 }
 
-#forgot-password {
+.nav-message {
     font-size: 12px;
 }
 
-#forgot-password:hover {
+.nav-message:hover {
     text-decoration: underline;
     cursor: pointer;
 }
@@ -169,40 +169,6 @@ input, option {
 
 #resume-name {
     display: inline-block;
-}
-
-.strike {
-    display: block;
-    text-align: center;
-    overflow: hidden;
-    white-space: nowrap; 
-    padding-top: 20px;
-    padding-bottom: 15px;
-}
-
-.strike > span {
-    position: relative;
-    display: inline-block;
-}
-
-.strike > span:before,
-.strike > span:after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 9999px;
-    height: 1px;
-    background: var(--color-light-text);
-}
-
-.strike > span:before {
-    right: 100%;
-    margin-right: 15px;
-}
-
-.strike > span:after {
-    left: 100%;
-    margin-left: 15px;
 }
 
 @media screen and (max-width: 900px) {

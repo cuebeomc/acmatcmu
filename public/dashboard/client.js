@@ -41,19 +41,19 @@ function loginUser(e) {
         switch(errorCode) {
             case 'auth/invalid-email':
                 errorMessageDiv.innerHTML = 'Invalid email.';
-                return;
+                break;
             case 'auth/user-disabled':
                 errorMessageDiv.innerHTML = 'This user has been disabled.';
-                return;
+                break;
             case 'auth/user-not-found':
                 errorMessageDiv.innerHTML = 'This user cannot be found.';
-                return;
+                break;
             case 'auth/wrong-password':
                 errorMessageDiv.innerHTML = 'Wrong password. Please try again';
-                return;
+                break;
             default:
                 errorMessageDiv.innerHTML = 'Unknown error occured.';
-                return;
+                break;
         };
     });
 }
@@ -87,25 +87,107 @@ function signUpUser(e) {
         var errorCode = error.code;
         var errorMessageDiv = document.getElementById('error-message');
 
-        console.log(error)
         switch(errorCode) {
             case 'auth/email-already-in-use':
                 errorMessageDiv.innerHTML = 'This email is already associated with an account.';
-                return;
+                break;
             case 'auth/invalid-email':
                 errorMessageDiv.innerHTML = 'This email is invalid.';
-                return;
+                break;
             case 'auth/operation-not-allowed':
                 errorMessageDiv.innerHTML = 'This shouldn\'t happen... Contact acm-exec@cs.cmu.edu.';
-                return;
+                break;
             case 'auth/weak-password':
                 errorMessageDiv.innerHTML = 'This password is too weak. The password should be at least 6 characters.';
-                return;
+                break;
             default:
                 errorMessageDiv.innerHTML = 'Unknown error occured.';
-                return;
+                break;
         };
     });
+}
+
+/**
+ * sendVerification sends the verification email to the logged
+ * in user's email account for verification. 
+ */
+function sendVerification() {
+    var user = firebase.auth().currentUser;
+
+    user.sendEmailVerification().then(function() {
+        getEmailSentUI();
+    }).catch(function(err) {
+        console.log(err);
+    });
+}
+
+/**
+ * getForgotPasswordUI shows the UI to reset password.
+ */
+function getForgotPasswordUI() {
+    fetch('/api/forgotPassword', {
+        method: 'GET'
+    }).then(response => response.text())
+    .then(res => {
+        var mainBody = document.getElementById('main-body');
+        mainBody.innerHTML = res;
+    });
+    selectIcon('home');
+}
+
+/**
+ * resetPassword resets the user's password and sends an email to
+ * their email.
+ * 
+ * @param {event} e - the default event of submitting a form
+ * 
+ */
+function resetPassword(e) {
+    e.preventDefault()
+
+    var email = document.getElementById('login-email').value;
+    firebase.auth().sendPasswordResetEmail(email).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessageDiv = document.getElementById('error-message');
+
+        switch(errorCode) {
+            case 'auth/invalid-email':
+                errorMessageDiv.innerHTML = 'This email is invalid.';
+                break;
+            case 'auth/missing-continue-uri':
+                errorMessageDiv.innerHTML = 'missing continue uri';
+                break;
+            case 'auth/invalid-continue-uri':
+                errorMessageDiv.innerHTML = 'invalid continue uri';
+                break;
+            case 'auth/unauthorized-continue-uri':
+                errorMessageDiv.innerHTML = 'unauthorized continue uri';
+                break;
+            case 'auth/user-not-found':
+                errorMessageDiv.innerHTML = 'This user is invalid.';
+                break;
+            default:
+                errorMessageDiv.innerHTML = 'Unknown error occured.';
+                break;
+        };
+    });
+
+    getEmailSentUI();
+}
+
+/**
+ * getEmailSentUI shows the "email sent" page.
+ */
+function getEmailSentUI() {
+    fetch('/api/emailSent', {
+        method: 'GET'
+    }).then(response => response.text())
+    .then(res => {
+        var mainBody = document.getElementById('main-body');
+        mainBody.innerHTML = res;
+    });
+    selectIcon('home');
 }
 
 /**
@@ -216,12 +298,12 @@ function getProfile() {
         if (resumeDiv != null) {
             var fileName = resumeDiv.innerHTML;
 
-            if (!firebase.auth().currentUser) {
+            var user = firebase.auth().currentUser;
+            if (!user) {
                 console.log('Why are you here? This is in an authorized request.');
                 return;
             }
 
-            var user = firebase.auth().currentUser;
             var storage = firebase.storage();
             var fileRef = storage.ref('user-storage/' + user.uid + '/' + fileName);
 
@@ -253,7 +335,6 @@ function setProfile(e) {
     var formData = new FormData();
 
     formData.append('name', document.getElementById('name').value);
-    formData.append('andrewid', document.getElementById('andrewid').value);
     formData.append('year', document.querySelector('input[name="year"]:checked').value);
     formData.append('size', document.querySelector('input[name="size"]:checked').value);
     formData.append('resume', fileInput.files[0]);
