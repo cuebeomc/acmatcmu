@@ -16,6 +16,14 @@ function selectIcon(iconId) {
             icon.removeAttribute('style');
         }
     }
+
+    // make this less hacky later
+    var topbar = document.getElementById('topbar')
+    if (iconId == 'home') {
+        topbar.innerHTML = 'Home';
+    } else if (iconId == 'profile') {
+        topbar.innerHTML = 'Profile';
+    }
 }
 
 /**

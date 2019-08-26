@@ -8,6 +8,9 @@
  ************************
  */
 
+ // TODO: For all getUI methods, add error handling where
+ // the GET request fails and alert the user.
+
 /**
  * getLoginUI gets the set of inputs that start the login flow.
  */
@@ -18,8 +21,8 @@ function getLoginUI() {
     .then(res => {
         var mainBody = document.getElementById('main-body');
         mainBody.innerHTML = res;
+        selectIcon('home');
     });
-    selectIcon('home');
 }
 
 /**
@@ -68,8 +71,8 @@ function getSignUpUI() {
     .then(res => {
         var mainBody = document.getElementById('main-body');
         mainBody.innerHTML = res;
+        selectIcon('home');
     });
-    selectIcon('home');
 }
 
 /**
@@ -115,8 +118,10 @@ function sendVerification() {
     var user = firebase.auth().currentUser;
 
     user.sendEmailVerification().then(function() {
-        getEmailSentUI();
+        var message = document.getElementById('email-message');
+        message.innerHTML = 'Email sent! Check your email.';
     }).catch(function(err) {
+        // TODO: Add showing errors.
         console.log(err);
     });
 }
@@ -131,8 +136,8 @@ function getForgotPasswordUI() {
     .then(res => {
         var mainBody = document.getElementById('main-body');
         mainBody.innerHTML = res;
+        selectIcon('home');
     });
-    selectIcon('home');
 }
 
 /**
@@ -186,8 +191,8 @@ function getEmailSentUI() {
     .then(res => {
         var mainBody = document.getElementById('main-body');
         mainBody.innerHTML = res;
+        selectIcon('home');
     });
-    selectIcon('home');
 }
 
 /**
@@ -260,6 +265,14 @@ function selectIcon(iconId) {
             icon.removeAttribute('style');
         }
     }
+
+    // make this less hacky later
+    var topbar = document.getElementById('topbar')
+    if (iconId == 'home') {
+        topbar.innerHTML = 'Home';
+    } else if (iconId == 'profile') {
+        topbar.innerHTML = 'Profile';
+    }
 }
 
 /**
@@ -271,11 +284,10 @@ function getStatus() {
     .then(function(res) {
         var mainBody = document.getElementById('main-body');
         mainBody.innerHTML = res;
+        selectIcon('home');
     }).catch(function(err) {
         console.log(err);
     })
-
-    selectIcon('home');
 }
 
 /*
@@ -317,11 +329,10 @@ function getProfile() {
             });
         }
 
+        selectIcon('profile');
     }).catch(function(err) {
         console.log(err);
     })
-
-    selectIcon('profile');
 }
 
 /**
@@ -343,6 +354,7 @@ function setProfile(e) {
     .then(function(res) {
         getStatus();
     }).catch(function(err) {
+        // TODO: set errors
         console.log(err);
     })
 }

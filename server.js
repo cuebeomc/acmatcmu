@@ -57,11 +57,6 @@ async function authenticate(req, res, next) {
             return;
         }
 
-        if (!req.user.email_verified) {
-            res.sendFile(path.join(__dirname, 'schemas/status/verify-andrewid.html'));
-            return;
-        }
-
         next();
         return;
     } catch(e) {
@@ -122,14 +117,55 @@ app.use('/dashboard', express.static(path.join(__dirname, 'public/dashboard')));
  */
 app.get('/api/status', authenticate, (req, res) => {
     console.log('GET to /api/status');
+
+    if (!req.user.email_verified) {
+        var data = {
+            statusMessage: 'Not registered',
+            todoMessage: 'You\'re not done yet! Two more things to do; first, verify your AndrewID by clicking <div class="hover-button" onclick="sendVerification()">here.</div> <div id="email-message">&nbsp;</div>'
+        }
+
+        ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send("Internal server error");
+            } else {
+                res.send(str)
+            }
+        })
+        return;
+    }
     var docRef = firestore.collection('users').doc(req.user.uid);
     docRef.get().then(documentSnapshot => {
         if (documentSnapshot.exists) {
-            res.sendFile(path.join(__dirname, 'schemas/status/register-event.html'));
+            var data = {
+                statusMessage: "Registered",
+                todoMessage: "You're done! We'll contact you once our decisions are out."
+            }
+
+            ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Internal server error");
+                } else {
+                    res.send(str)
+                }
+            })
             return;
         }
         else {
-            res.sendFile(path.join(__dirname, 'schemas/profile/set-profile.html'));
+            var data = {
+                statusMessage: 'Not registered',
+                todoMessage: 'One last thing to do! Set your profile in the Profile tab.'
+            }
+    
+            ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Internal server error");
+                } else {
+                    res.send(str)
+                }
+            })
             return;
         }
     });
