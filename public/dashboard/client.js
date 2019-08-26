@@ -240,7 +240,9 @@ function sendAuthReq(method, url, body) {
         }
 
         return fetch(url, request)
-        .then(response => response.text());
+        .then(response => {
+            return response.text();
+        });
     });
 }
 
@@ -286,6 +288,7 @@ function getStatus() {
         mainBody.innerHTML = res;
         selectIcon('home');
     }).catch(function(err) {
+        mainBody.innerHTML = 'Failed to get home page. Please try again later.';
         console.log(err);
     })
 }
@@ -331,6 +334,7 @@ function getProfile() {
 
         selectIcon('profile');
     }).catch(function(err) {
+        mainBody.innerHTML = 'Failed to get profile page. Please try again later.';
         console.log(err);
     })
 }
@@ -352,9 +356,16 @@ function setProfile(e) {
 
     sendAuthReq('POST', '/api/profile', formData)
     .then(function(res) {
-        getStatus();
+        // very bad hack for now
+        var status = parseInt(res.substr(0, res.indexOf(':')));
+        var message = res.substr(res.indexOf(':') + 2);
+        if (status != 200) {
+            var errorMessageDiv = document.getElementById('error-message');
+            errorMessageDiv.innerHTML = message;
+        } else {
+            getStatus();
+        }
     }).catch(function(err) {
-        // TODO: set errors
         console.log(err);
     })
 }
@@ -372,7 +383,7 @@ function enableEdit() {
             elem.style.display = 'block';
             var downloadElem = document.getElementById('resume-download');
             downloadElem.style.display = 'none';
-        } else if (!elem.hasAttribute('verified')) {
+        } else {
             elem.removeAttribute('disabled');
         }
     }

@@ -27,9 +27,9 @@ body {
 
 #main {
     margin-bottom: 30px;
-    min-width: 850px;
-    width: 850px;
-    height: 650px;
+    min-width: 700px;
+    width: 700px;
+    height: 550px;
     border-radius: 20px;
     background-color: #FFFFFF;
     box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2), 0 9px 30px 0 rgba(0, 0, 0, 0.19);
@@ -99,6 +99,11 @@ p {
 .form {
     width: 70%;
     margin: auto;
+}
+
+.required {
+    display: inline;
+    color: red;
 }
 
 #login {
@@ -255,7 +260,7 @@ input, option {
     font-size: 22px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 800px) {
     #topbar {
         display: block;
         position: absolute;
@@ -280,7 +285,7 @@ input, option {
         box-shadow: none;
         display: block;
         margin-bottom: 70px;
-        overflow: scroll;
+        overflow-y: scroll;
     }
 
     #sidebar {
@@ -293,7 +298,7 @@ input, option {
     }
 
     .nav-icon {
-        width: 50vw;
+        width: 33vw;
         border-radius: 0px;
     }
     .nav-icon:hover {

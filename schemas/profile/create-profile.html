@@ -1,11 +1,11 @@
 <form id="form" class="form" onsubmit="setProfile(event)" enctype="multipart/form-data">
     <div>
-        <label for="name">Name</label>
+        <label for="name">Name<div class="required">*</div></label>
         <div>
-            <input type="text" class="input" name="name" id="name"></input>
+            <input type="text" class="input" name="name" id="name" required></input>
         </div>
     </div>
-    <label for="class-year">Select your class year</label>
+    <label for="class-year">Select your class year<div class="required">*</div></label>
     <div id="class-year" class="select">
         <label>
             <input name="year" type="radio" value="freshman" checked />
@@ -28,7 +28,7 @@
             <span>Graduate</span>
         </label>
     </div>
-    <label for="size-selection">Select your T-shirt size</label>
+    <label for="size-selection">Select your T-shirt size<div class="required">*</div></label>
     <div id="size-selection" class="select">
         <label>
             <input name="size" type="radio" value="XS" checked />
@@ -64,5 +64,6 @@
         </div>
     </div>
 
+    <div id="error-message">&nbsp;</div>
     <button type="submit" id="profile-button" class="btn">Set profile</button>
 </form>

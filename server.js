@@ -53,7 +53,19 @@ async function authenticate(req, res, next) {
         var domain = email.replace(/.*@/, "");
 
         if (domain != andrewDomain) {
-            res.status(403).sendFile(path.join(__dirname, 'schemas/error-pages/wrong-email-domain.html'));
+            var data = {
+                statusMessage: 'INVALID',
+                todoMessage: 'You\'re not logged in using an Andrew email! Please log in/sign up with an Andrew email to continue.'
+            }
+    
+            ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send("Internal server error");
+                } else {
+                    res.status(403).send(str)
+                }
+            })
             return;
         }
 
@@ -139,7 +151,7 @@ app.get('/api/status', authenticate, (req, res) => {
         if (documentSnapshot.exists) {
             var data = {
                 statusMessage: "Registered",
-                todoMessage: "You're done! We'll contact you once our decisions are out."
+                todoMessage: "You're done! If you'd like to participate as a team, join or create a team in the Teams tab. We'll contact you once our decisions are out."
             }
 
             ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
@@ -178,8 +190,13 @@ app.get('/api/status', authenticate, (req, res) => {
  */
 app.get('/api/profile', authenticate, (req, res) => {
     console.log('GET to /api/profile');
-    var docRef = firestore.collection('users').doc(req.user.uid);
 
+    if (!req.user.email_verified) {
+        res.status(403).send('Your email has not been verified!');
+        return;
+    }
+
+    var docRef = firestore.collection('users').doc(req.user.uid);
     docRef.get().then(documentSnapshot => {
         if (documentSnapshot.exists) {
             var doc = documentSnapshot.data()
@@ -275,12 +292,17 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
 
     // validate data
     if ( req.body.name == '' || !isIn(validYears, req.body.year) || !isIn(shirtSizes, req.body.size)) {
-        res.status(400).send('Bad request: invalid form data');
+        res.status(400).send('400: Invalid form data.');
         return;
     }
 
     var email = req.user.email;
     var andrewID = email.replace(/@.*$/,"");
+
+    if (!req.user.email_verified) {
+        res.status(403).send('403: Your email has not been verified!');
+        return;
+    }
 
     // baseline data that gets sent with every request
     var data = {
@@ -298,7 +320,7 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
         if (req.file) {
             // first, we validate the file type
             if (req.file.mimetype != 'application/pdf') {
-                res.status(400).send('Bad request: invalid form data');
+                res.status(400).send('400: Invalid resume file type.');
                 return;
             }
 
@@ -306,7 +328,7 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
             var resumeName = req.file.originalname;
             var err = uploadFile(req, res);
             if (err != null) {
-                res.status(500).send('Internal server error.');
+                res.status(500).send('500: Internal server error.');
                 return;
             }
 
@@ -324,26 +346,26 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
             // we UPDATE data, not set data, since user may not have updated resume
             userData.doc(req.user.uid).update(data)
             .then(result => {
-                res.status(200).send('success');
+                res.status(200).send('200: Success!');
             }).catch(err => {
                 console.log(err)
-                res.status(500).send('Internal server error.');
+                res.status(500).send('500: Internal server error.');
             })
         } else {
             // otherwise, if no document stored for this user,
             // we set data; should not have any impact
             userData.doc(req.user.uid).set(data)
             .then(result => {
-                res.status(200).send('success');
+                res.status(200).send('200: Success!');
             }).catch(err => {
                 console.log(err)
-                res.status(500).send('Internal server error.');
+                res.status(500).send('500: Internal server error.');
             })
         }
 
     }).catch(err => {
         console.log(err);
-        res.status(500).send('Internal server error');
+        res.status(500).send('500: Internal server error');
     });
 });
 
