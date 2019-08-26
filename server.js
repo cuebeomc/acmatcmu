@@ -309,8 +309,7 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
         name: req.body.name,
         andrewID: andrewID,
         classYear: req.body.year,
-        shirtSize: req.body.size,
-        role: 'participant'
+        shirtSize: req.body.size
     };
 
     // now we check the database for the user's data
