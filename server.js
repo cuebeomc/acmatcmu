@@ -19,6 +19,15 @@ var upload = multer({
     }
 });
 
+if (process.env.NODE_ENV == 'production') {
+    app.use((req, res, next) => {
+        if (req.header('x-forwarded-proto') !== 'https')
+            res.redirect(`https://${req.header('host')}${req.url}`)
+        else
+            next()
+    })
+}
+
 // initialize admin SDK
 admin.initializeApp({
     credential: admin.credential.cert({
@@ -756,6 +765,7 @@ app.delete('/api/teams', authenticate, (req, res) => {
                             return;
                         });
                     } else {
+                        // otherwise just remove the user only
                         docRef.update({
                             team: admin.firestore.FieldValue.delete()
                         }).then(result => {
