@@ -49,7 +49,7 @@ var teamData = firestore.collection('teams');
 
 // define valid values for profile forms
 var validYears = ['freshman', 'sophomore', 'junior', 'senior', 'graduate'];
-var validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+var validSizes = ['S', 'M', 'L', 'XL', 'XXL'];
 var validRoles = ['participant', 'mentor'];
 
 // add authentication middleware
