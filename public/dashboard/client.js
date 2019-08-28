@@ -414,6 +414,12 @@ function enableEdit() {
  **********************
  */
 
+/**
+ * getTeams calls the /api/teams route, which sends the "Join or Create"
+ * page if the user is not in a team already, or the team page if the
+ * user is in a team. If the user is a mentor, it only sends a "You cannot
+ * view this page!" notification.
+ */
 function getTeams() {
     sendAuthReq('GET', '/api/teams', null, '')
     .then(function(res) {
@@ -426,6 +432,13 @@ function getTeams() {
     })
 }
 
+/**
+ * createTeam creates a team with the given team name. On success,
+ * it calls getTeams to show the team page. The route requires the team
+ * name to not have been taken already.
+ * 
+ * @param {event} e - the default onsubmit event for a form
+ */
 function createTeam(e) {
     e.preventDefault();
 
@@ -450,6 +463,13 @@ function createTeam(e) {
     })
 }
 
+/**
+ * joinTeam takes the given team name and access code and tries to
+ * join that team. On success, it redirects to /api/teams, which
+ * should get the teams page. On fail, it notifies the user.
+ * 
+ * @param {event} e - the default onsubmit event for a form
+ */
 function joinTeam(e) {
     e.preventDefault();
 
@@ -475,6 +495,12 @@ function joinTeam(e) {
     })
 }
 
+/**
+ * removeTeam does one of two things: if the user is the owner of
+ * a team, it deletes the team (as well as all users associated
+ * with that team), and if the user is not the owner, it simply
+ * removes them from the team.
+ */
 function removeTeam() {
     sendAuthReq('DELETE', '/api/teams', null, '')
     .then(function(res) {

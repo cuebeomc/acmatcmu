@@ -26,7 +26,7 @@ if (process.env.NODE_ENV == 'production') {
         } else {
             next();
         }
-    })
+    });
 }
 
 // initialize admin SDK
