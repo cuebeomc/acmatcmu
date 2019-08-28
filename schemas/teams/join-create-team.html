@@ -1,0 +1,39 @@
+<div id="home-container">
+    <div id="team-header">
+        <h2>Join a team</h2>
+        <p>or</p>
+        <h2>Create a team.</h2>
+    </div>
+    <div id="join-or-create">
+        <div class="team-action" id="join">
+            <form onsubmit="joinTeam(event)" enctype="application/x-www-form-urlencoded">
+                <div class="inputs">
+                    <div class="input-field">
+                        <input type="text" class="input" name="join-team" id="join-team" required></input>
+                        <label for="join-team">Team name</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" class="input" name="access-code" id="access-code" required></input>
+                        <label for="access-code">Access code</label>
+                    </div>
+                    <div class="error-message" id="error-message-join">&nbsp;</div>
+                    <button type="submit" class="btn">Join</button>
+                </div>
+            </form>
+        </div>
+        <div id="separator"></div>
+        <div class="team-action" id="create">
+            <form onsubmit="createTeam(event)" enctype="application/x-www-form-urlencoded">
+                <div class="inputs">
+                    <div class="input-field">
+                        <input type="text" class="input" name="create-team" id="create-team" required></input>
+                        <label for="create-team">Team name</label>
+                    </div>
+
+                    <div class="error-message" id="error-message-create">&nbsp;</div>
+                    <button type="submit" class="btn">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

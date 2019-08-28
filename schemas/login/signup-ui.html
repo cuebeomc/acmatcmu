@@ -1,0 +1,24 @@
+<div id="login">
+
+    <h2>Sign up to register for our events.</h2>
+    <p>You must sign up with your Andrew email (andrew.cmu.edu)!<bo</p>
+
+    <form onsubmit="signUpUser(event)">
+        <div id="login-fields">
+            <div class="input-field">
+                <input type="email" id="login-email" required>
+                <label for="login-email">Email</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="login-password" required>
+                <label for="login-password">Password</label>
+            </div>
+        </div>
+
+        <div class="nav-message" onclick="getLoginUI()">< Back</div>
+        <div class="error-message" id="error-message">&nbsp;</div>
+
+        <button type="submit" id="login-button" class="btn">Sign up</button>
+
+    </form>
+</div>

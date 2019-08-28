@@ -1,0 +1,28 @@
+<div id="login">
+
+    <h2>Login to your ACM@CMU dashboard.</h2>
+    <form onsubmit="loginUser(event)">
+        <div id="login-fields">
+            <div class="input-field">
+                <input type="email" id="login-email" required>
+                <label for="login-email">Email</label>
+            </div>
+            <div class="input-field">
+                <input type="password" id="login-password" required>
+                <label for="login-password">Password</label>
+            </div>
+        </div>
+
+        <div class="nav-message" onclick="getForgotPasswordUI()">Forgot password?</div>
+        <div class="error-message" id="error-message">&nbsp;</div>
+
+        <button type="submit" id="login-button" class="btn">Login</button>
+    </form>
+
+    <div class="strike">
+        <span>OR</span>
+    </div>
+    <div id="sign-up-message">
+        <div id="sign-up" onclick="getSignUpUI()">Sign up</div> to register for our events.
+    </div>
+</div>

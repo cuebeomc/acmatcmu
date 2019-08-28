@@ -1,0 +1,20 @@
+<div id="home-container">
+    <div>
+        <h2 id="team-name">Team: <%= teamName %></h2>
+        <p>Access code: <%= accessCode %></p>
+    </div>
+    <div id="member-container">
+        <h2 id="title">Members:</h2>
+        <% for (var i=0; i < members.length; i++) { %>
+            <div class="member">
+                <div><%= members[i] %></div>
+            </div>
+        <% } %>
+    </div>
+    <div class="error-message" id="error-message">&nbsp;</div>
+    <% if (isOwner) { %>
+        <button class="btn red" onclick="removeTeam()">Delete team</button>
+    <% } else { %>
+        <button class="btn red" onclick="removeTeam()">Leave team</button>
+    <% } %>
+</div>
