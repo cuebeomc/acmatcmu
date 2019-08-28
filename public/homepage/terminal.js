@@ -15,7 +15,7 @@ const cursor = '▋'
 const typeDelay = 35;
 const lineDelay = 150;
 
-const linkIds = ['welcome', 'aboutus', 'events', 'sponsors', 'login'];
+const linkIds = ['welcome', 'aboutus', 'events', 'sponsors'];
 
 /* wait is a helper to wait the given amount of time, in ms. */
 function wait(time) {
