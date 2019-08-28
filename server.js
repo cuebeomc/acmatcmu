@@ -45,7 +45,7 @@ var validRoles = ['participant', 'mentor'];
 // add authentication middleware
 async function authenticate(req, res, next) {
     if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
-        res.status(403).send('Unauthorized');
+        res.status(401).send('Unauthorized');
         return;
     }
     const idToken = req.headers.authorization.split('Bearer ')[1];
@@ -77,7 +77,7 @@ async function authenticate(req, res, next) {
         return;
     } catch(e) {
         console.log(e)
-        res.status(403).send('Unauthorized');
+        res.status(401).send('Unauthorized');
         return;
     }
 }
@@ -657,20 +657,33 @@ app.post('/api/joinTeam', [authenticate, bodyParser.json()], (req, res) => {
                             return;
                         }
 
-                        // update the user's team data
-                        docRef.update({
-                            team: teamSnapshot.id
-                        }).then(result => {
-                            res.send('200: Success!');
-                            return;
+                        // check that the team has < 4 members
+                        userData.where('team', '==', teamSnapshot.id).get()
+                        .then(snapshot => {
+                            if (snapshot.size < 4) {
+                                // update the user's team data
+                                docRef.update({
+                                    team: teamSnapshot.id
+                                }).then(result => {
+                                    res.send('200: Success!');
+                                    return;
+                                }).catch(err => {
+                                    res.status(500).send('500: Internal server error.');
+                                    return;
+                                });
+
+                            } else {
+                                res.status(403).send('403: This team is full.');
+                                return;
+                            }
                         }).catch(err => {
-                            res.status().send('500: Internal server error.');
+                            res.status(500).send('500: Internal server error.');
                             return;
-                        });
+                        })
 
                     } else {
                         // if no snapshot, user should create profile first
-                        res.status().send('403: Create your profile first!');
+                        res.status(403).send('403: Create your profile first!');
                         return;
                     }
 
