@@ -19,10 +19,13 @@ function selectIcon(iconId) {
 
     // make this less hacky later
     var topbar = document.getElementById('topbar')
-    if (iconId == 'home') {
-        topbar.innerHTML = 'Home';
-    } else if (iconId == 'profile') {
-        topbar.innerHTML = 'Profile';
+    switch (iconId) {
+        case 'home':
+            topbar.innerHTML = 'Home';
+        case 'profile':
+            topbar.innerHTML = 'Profile';
+        case 'teams':
+            topbar.innerHTML = 'Teams';
     }
 }
 

@@ -55,7 +55,15 @@
             <span>XXL</span>
         </label>
     </div>
-    
+    <label for="switch">I would like to be a...<div class="required">*</div></label>
+    <div class="switch" id="role">
+        <label>
+            Participant
+            <input type="checkbox" id="role-checkbox">
+            <span class="lever"></span>
+            Mentor
+        </label>
+    </div>
 
     <div>
         <label for="resume-upload">Upload your resume.</label>
@@ -64,6 +72,6 @@
         </div>
     </div>
 
-    <div id="error-message">&nbsp;</div>
+    <div class="error-message" id="error-message">&nbsp;</div>
     <button type="submit" id="profile-button" class="btn">Set profile</button>
 </form>

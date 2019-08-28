@@ -110,6 +110,10 @@ p {
     width: 50%;
 }
 
+#role {
+    padding-bottom: 5px;
+}
+
 .nav-message {
     font-size: 12px;
 }
@@ -135,7 +139,7 @@ p {
     cursor: pointer;
 }
 
-#error-message {
+.error-message {
     color: red;
     padding-bottom: 8px;
 }
@@ -222,6 +226,10 @@ input, option {
     height: 80%;
 }
 
+#team-name {
+    font-size: 25px;
+}
+
 #welcome-bar {
     width: 100%;
     display: flex;
@@ -230,6 +238,56 @@ input, option {
 
 #welcome-bar h2 {
     font-size: 25px;
+}
+
+#join-or-create {
+    padding-top: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.team-action {
+    width: 50%;
+}
+
+.team-action .input-field {
+    width: 80%;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.inputs button {
+    width: 80%;
+}
+
+#team-header {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#team-header h2 {
+    width: 115px;
+    text-align: center;
+}
+
+#separator {
+    width: 1px;
+    height: auto;
+    background-color: #d4d4d4;
+}
+
+#join {
+    padding-right: 10px;
+}
+
+#create {
+    padding-left: 10px;
 }
 
 .hover-button {
@@ -252,12 +310,20 @@ input, option {
     text-align: center;
     width: 400px;
     padding: 20px;
-    background-color: #d4d4d4;
+    background-color: #e9e9e9;
     border-radius: 15px;
 }
 
 #status-message {
     font-size: 22px;
+}
+
+#member-container {
+    padding: 50px 0px 40px 20px;
+}
+
+#title {
+    padding-bottom: 5px;
 }
 
 @media screen and (max-width: 800px) {
@@ -319,6 +385,10 @@ input, option {
     .form {
         width: 60%;
         margin: auto;
+    }
+
+    #join-or-create {
+        padding-top: 40px;
     }
 }
 

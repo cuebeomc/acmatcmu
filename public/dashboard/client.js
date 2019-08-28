@@ -8,9 +8,6 @@
  ************************
  */
 
- // TODO: For all getUI methods, add error handling where
- // the GET request fails and alert the user.
-
 /**
  * getLoginUI gets the set of inputs that start the login flow.
  */
@@ -220,7 +217,7 @@ function signOut() {
  * @param {string} url - The request URL for the HTTP request
  * @param {*} body - The body to send along with the request (if request is POST)
  */
-function sendAuthReq(method, url, body) {
+function sendAuthReq(method, url, body, contentType) {
     if (!firebase.auth().currentUser) {
         throw new Error('Not authenticated. Make sure you\'re signed in!');
     }
@@ -236,7 +233,11 @@ function sendAuthReq(method, url, body) {
         };
 
         if (method === 'POST') {
-            request.body = body
+            request.body = body;
+
+            if (contentType === 'application/json') {
+                request.headers['Content-Type'] = contentType;
+            }
         }
 
         return fetch(url, request)
@@ -270,10 +271,16 @@ function selectIcon(iconId) {
 
     // make this less hacky later
     var topbar = document.getElementById('topbar')
-    if (iconId == 'home') {
-        topbar.innerHTML = 'Home';
-    } else if (iconId == 'profile') {
-        topbar.innerHTML = 'Profile';
+    switch (iconId) {
+        case 'home':
+            topbar.innerHTML = 'Home';
+            break;
+        case 'profile':
+            topbar.innerHTML = 'Profile';
+            break;
+        case 'teams':
+            topbar.innerHTML = 'Teams';
+            break;
     }
 }
 
@@ -282,7 +289,7 @@ function selectIcon(iconId) {
  * and setting up the profile.
  */
 function getStatus() {
-    sendAuthReq('GET', '/api/status', null)
+    sendAuthReq('GET', '/api/status', null, '')
     .then(function(res) {
         var mainBody = document.getElementById('main-body');
         mainBody.innerHTML = res;
@@ -304,7 +311,7 @@ function getStatus() {
  * the profile for the current user if they have not created a profile yet.
  */
 function getProfile() {
-    sendAuthReq('GET', '/api/profile', null)
+    sendAuthReq('GET', '/api/profile', null, '')
     .then(function(res) {
         var mainBody = document.getElementById('main-body');
         mainBody.innerHTML = res;
@@ -352,9 +359,16 @@ function setProfile(e) {
     formData.append('name', document.getElementById('name').value);
     formData.append('year', document.querySelector('input[name="year"]:checked').value);
     formData.append('size', document.querySelector('input[name="size"]:checked').value);
+
+    var role = 'participant';
+    if (document.getElementById('role-checkbox').checked) {
+        role = 'mentor';
+    }
+    formData.append('role', role);
+
     formData.append('resume', fileInput.files[0]);
 
-    sendAuthReq('POST', '/api/profile', formData)
+    sendAuthReq('POST', '/api/profile', formData,'')
     .then(function(res) {
         // very bad hack for now
         var status = parseInt(res.substr(0, res.indexOf(':')));
@@ -392,6 +406,91 @@ function enableEdit() {
     editButton.style.display = 'none';
     var setButton = document.getElementById('set-button');
     setButton.style.display = 'block';
+}
+
+/*
+ **********************
+ *      Teams UI      *
+ **********************
+ */
+
+function getTeams() {
+    sendAuthReq('GET', '/api/teams', null, '')
+    .then(function(res) {
+        var mainBody = document.getElementById('main-body');
+        mainBody.innerHTML = res;
+        selectIcon('teams');
+    }).catch(function(err) {
+        mainBody.innerHTML = 'Failed to get teams page. Please try again later.';
+        console.log(err);
+    })
+}
+
+function createTeam(e) {
+    e.preventDefault();
+
+    var body = {
+        teamName: document.getElementById('create-team').value
+    }
+
+    sendAuthReq('POST', '/api/teams', JSON.stringify(body), 'application/json')
+    .then(function(res) {
+        // very bad hack for now
+        var status = parseInt(res.substr(0, res.indexOf(':')));
+        var message = res.substr(res.indexOf(':') + 2);
+        if (status != 200) {
+            var errorMessageDiv = document.getElementById('error-message-create');
+            errorMessageDiv.innerHTML = message;
+        } else {
+            getTeams();
+        }
+    }).catch(function(err) {
+        mainBody.innerHTML = 'Failed to get teams page. Please try again later.';
+        console.log(err);
+    })
+}
+
+function joinTeam(e) {
+    e.preventDefault();
+
+    var body = {
+        teamName: document.getElementById('join-team').value,
+        accessCode: document.getElementById('access-code').value
+    }
+
+    sendAuthReq('POST', '/api/joinTeam', JSON.stringify(body), 'application/json')
+    .then(function(res) {
+        // very bad hack for now
+        var status = parseInt(res.substr(0, res.indexOf(':')));
+        var message = res.substr(res.indexOf(':') + 2);
+        if (status != 200) {
+            var errorMessageDiv = document.getElementById('error-message-join');
+            errorMessageDiv.innerHTML = message;
+        } else {
+            getTeams();
+        }
+    }).catch(function(err) {
+        mainBody.innerHTML = 'Failed to get teams page. Please try again later.';
+        console.log(err);
+    })
+}
+
+function removeTeam() {
+    sendAuthReq('DELETE', '/api/teams', null, '')
+    .then(function(res) {
+        // very bad hack for now
+        var status = parseInt(res.substr(0, res.indexOf(':')));
+        var message = res.substr(res.indexOf(':') + 2);
+        if (status != 200) {
+            var errorMessageDiv = document.getElementById('error-message');
+            errorMessageDiv.innerHTML = message;
+        } else {
+            getTeams();
+        }
+    }).catch(function(err) {
+        mainBody.innerHTML = 'Failed to get teams page. Please try again later.';
+        console.log(err);
+    })
 }
 
 /**

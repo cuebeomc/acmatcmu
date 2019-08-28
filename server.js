@@ -1,12 +1,14 @@
+const UIDGenerator = require('uid-generator');
+const bodyParser = require('body-parser');
 const admin = require('firebase-admin');
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const ejs = require('ejs');
-
 const app = express();
 const port = 3000;
 
+const uidgen = new UIDGenerator(40, UIDGenerator.BASE36);
 const andrewDomain = 'andrew.cmu.edu';
 
 var storage = multer.memoryStorage();
@@ -33,10 +35,12 @@ var firestore = admin.firestore();
 var storage = admin.storage();
 var users = storage.bucket();
 var userData = firestore.collection('users');
+var teamData = firestore.collection('teams');
 
 // define valid values for profile forms
 var validYears = ['freshman', 'sophomore', 'junior', 'senior', 'graduate'];
-var shirtSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+var validSizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+var validRoles = ['participant', 'mentor'];
 
 // add authentication middleware
 async function authenticate(req, res, next) {
@@ -78,11 +82,13 @@ async function authenticate(req, res, next) {
     }
 }
 
+
 /**
  *********************************
  *        HOMEPAGE ROUTES        *
  *********************************
  */
+
 
 app.use('/', express.static(path.join(__dirname, 'public/homepage')));
 
@@ -113,10 +119,75 @@ app.get('/sponsors', (req, res) => {
 
 
 /**
+ *********************************
+ *    USER MANAGEMENT UI/FLOW    *
+ *********************************
+ */
+
+
+/**
+ * GET /usermgmt handles user management (the link that verifies email,
+ * recover email, forgot password). We don't handle this backend and let
+ * the client handle it instead.
+ */
+app.use('/usermgmt', express.static(path.join(__dirname, 'public/user-mgmt')));
+
+/**
+ * GET /api/redirect sends the redirect UI.
+ */
+app.get('/api/redirect', (req, res) => {
+    console.log('GET to /redirect')
+    res.sendFile(path.join(__dirname, 'schemas/login/redirect-ui.html'));
+});
+
+/**
+ * GET /api/login responds with the UI for the login prompt.
+ */
+app.get('/api/login', (req, res) => {
+    console.log('GET to /api/login');
+    res.sendFile(path.join(__dirname, 'schemas/login/login-ui.html'));
+});
+
+/**
+ * GET /api/signup responds with the UI for the signup prompt.
+ */
+app.get('/api/signUp', (req, res) => {
+    console.log('GET to /api/signUp');
+    res.sendFile(path.join(__dirname, 'schemas/login/signup-ui.html'));
+});
+
+/**
+ * GET /api/forgotPassword sends the forgotPassword UI.
+ */
+app.get('/api/forgotPassword', (req, res) => {
+    console.log('GET to /forgotPassword')
+    res.sendFile(path.join(__dirname, 'schemas/login/forgot-password-ui.html'));
+});
+
+/**
+ * GET /api/resetPassword sends the resetPassword UI.
+ */
+app.get('/api/resetPassword', (req, res) => {
+    console.log('GET to /resetPassword')
+    res.sendFile(path.join(__dirname, 'schemas/login/reset-password-ui.html'));
+});
+
+/**
+ * GET /api/emailSent sends the messages that shows that the verification email
+ * has been sent.
+ */
+app.get('/api/emailSent', (req, res) => {
+    console.log('GET to /emailSent')
+    res.sendFile(path.join(__dirname, 'schemas/status/email-sent.html'));
+});
+
+
+/**
  ********************************
  *       DASHBOARD ROUTES       *
  ********************************
  */
+
 
 /**
  * GET /dashboard is for the "home" page of the login system
@@ -146,12 +217,12 @@ app.get('/api/status', authenticate, (req, res) => {
         })
         return;
     }
-    var docRef = firestore.collection('users').doc(req.user.uid);
+    var docRef = userData.doc(req.user.uid);
     docRef.get().then(documentSnapshot => {
         if (documentSnapshot.exists) {
             var data = {
                 statusMessage: "Registered",
-                todoMessage: "You're done! If you'd like to participate as a team, join or create a team in the Teams tab. We'll contact you once our decisions are out."
+                todoMessage: "You're done! If you'd like to participate as a team, join or create a team in the Teams tab. We'll contact you once decisions are out."
             }
 
             ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
@@ -196,7 +267,7 @@ app.get('/api/profile', authenticate, (req, res) => {
         return;
     }
 
-    var docRef = firestore.collection('users').doc(req.user.uid);
+    var docRef = userData.doc(req.user.uid);
     docRef.get().then(documentSnapshot => {
         if (documentSnapshot.exists) {
             var doc = documentSnapshot.data()
@@ -204,6 +275,7 @@ app.get('/api/profile', authenticate, (req, res) => {
                 name: doc.name,
                 year: doc.classYear,
                 size: doc.shirtSize,
+                role: doc.role
             }
 
             if (doc.resumeName != null) {
@@ -291,7 +363,8 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
     console.log('POST to /api/profile');
 
     // validate data
-    if ( req.body.name == '' || !isIn(validYears, req.body.year) || !isIn(shirtSizes, req.body.size)) {
+    if ( req.body.name == '' || !isIn(validYears, req.body.year) 
+      || !isIn(validSizes, req.body.size) || !isIn(validRoles, req.body.role) ) {
         res.status(400).send('400: Invalid form data.');
         return;
     }
@@ -309,7 +382,8 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
         name: req.body.name,
         andrewID: andrewID,
         classYear: req.body.year,
-        shirtSize: req.body.size
+        shirtSize: req.body.size,
+        role: req.body.role,
     };
 
     // now we check the database for the user's data
@@ -342,6 +416,11 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
 
         // if the user has a document
         if (documentSnapshot.exists) {
+            var doc = documentSnapshot.data();
+            if (doc.team != null && req.body.role == 'mentor') {
+                res.status(400).send('400: You are in a team - leave the team first before becoming a mentor!');
+                return;
+            }
             // we UPDATE data, not set data, since user may not have updated resume
             userData.doc(req.user.uid).update(data)
             .then(result => {
@@ -369,66 +448,329 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
 });
 
 /**
- ***********************************
- *    User Management UI + flow    *
- ***********************************
+ ****************************
+ *       TEAMS ROUTES       *
+ ****************************
  */
-
 
 /**
- * GET /usermgmt handles user management (the link that verifies email,
- * recover email, forgot password). We don't handle this backend and let
- * the client handle it instead.
+ * GET /api/teams shows the Join or Create team page if the
+ * user is not in a team, and otherwise it shows the members
+ * of the team that the user is in. 
  */
-app.use('/usermgmt', express.static(path.join(__dirname, 'public/user-mgmt')));
+app.get('/api/teams', authenticate, (req, res) => {
+    console.log('GET to /api/teams');
 
-/**
- * GET /api/redirect sends the redirect UI.
- */
-app.get('/api/redirect', (req, res) => {
-    console.log('GET to /redirect')
-    res.sendFile(path.join(__dirname, 'schemas/login/redirect-ui.html'));
+    // if email isn't verified, show error msg
+    if (!req.user.email_verified) {
+        res.status(403).send('Your email has not been verified!');
+        return;
+    }
+
+    // look up the user
+    var docRef = userData.doc(req.user.uid);
+    docRef.get().then(documentSnapshot => {
+
+        // if the user has set profile, we check if they're in a team
+        if (documentSnapshot.exists) {
+            var doc = documentSnapshot.data();
+
+            // if they're in a team, we look up the team and show the UI
+            if (doc.team != null && doc.role == 'participant') {
+                var teamRef = teamData.doc(doc.team);
+                teamRef.get().then(teamSnapshot => {
+                    if (teamSnapshot.exists) {
+                        var team = teamSnapshot.data();
+
+                        // get all users in this team
+                        userData.where('team', '==', doc.team).get()
+                        .then(snapshot => {
+                            var andrewIDs = [];
+                            snapshot.forEach(doc => {
+                                andrewIDs.push(doc.data().andrewID);
+                            });
+
+                            var data = {
+                                teamName: team.name,
+                                accessCode: team.accessCode,
+                                members: andrewIDs,
+                                isOwner: (team.owner == req.user.uid)
+                            }
+
+                            ejs.renderFile(path.join(__dirname, 'schemas/teams/team-page.ejs'), data, (err, str) => {
+                                if (err) {
+                                    console.log(err);
+                                    res.status(500).send("Internal server error");
+                                } else {
+                                    res.send(str)
+                                }
+                            })
+
+                        }).catch(err => {
+                            // failed to get data
+                            console.log(err);
+                            res.status(500).send('Internal server error.');
+                            return;
+                        });
+
+                    } else {
+                        // should never get here; that means some data is inconsistent
+                        res.status(500).send('Internal server error.');
+                        return;
+                    }
+                })
+            } else if (doc.role == 'mentor') {
+                // if the user is a mentor, don't display the Teams page at all.
+                res.status(200).send('This page is not available for mentors.');
+                return;
+            } else {
+                res.sendFile(path.join(__dirname, 'schemas/teams/join-create-team.html'));
+                return;
+            }
+        } else {
+            // if the user has no profile, we send them a simple one-liner
+            res.status(403).send('Your profile has not been created yet!');
+            return;
+        }
+    }); 
 });
 
 /**
- * GET /api/login responds with the UI for the login prompt.
+ * POST /api/teams creates a team for the user with the given
+ * team name. The team name must not be empty and should be unique.
+ * It generates an access code other users can use to join the team.
  */
-app.get('/api/login', (req, res) => {
-    console.log('GET to /api/login');
-    res.sendFile(path.join(__dirname, 'schemas/login/login-ui.html'));
+app.post('/api/teams', [authenticate, bodyParser.json()], (req, res) => {
+    console.log('POST to /api/teams');
+
+    // validate form
+    if (req.body.teamName == '') {
+        res.status(400).send("400: Please enter a team name.");
+        return;
+    }
+
+    var docRef = userData.doc(req.user.uid);
+    docRef.get().then(documentSnapshot => {
+
+        // if the user has set profile, we check if they're allowed
+        // to create a team (participant + not already in a team)
+        if (documentSnapshot.exists) {
+            var doc = documentSnapshot.data();
+
+            // user must be a participant
+            if (doc.role != 'participant') {
+                res.status(403).send('400: You cannot create a team as a mentor!');
+            }
+
+            if (doc.team != null) {
+                res.status(400).send('400: User is already in a team.');
+                return;
+            }
+
+            // check if team name is unique
+            teamData.where('name', '==', req.body.teamName).get()
+            .then(querySnapshot => {
+                // if no team is found, continue 
+                if (querySnapshot.size == 0) {
+
+                    // add team with randomly generated uid and access code
+                    teamData.add({
+                        name: req.body.teamName,
+                        accessCode: uidgen.generateSync(),
+                        owner: req.user.uid
+                    }).then(ref => {
+
+                        // update the creator's team status
+                        userData.doc(req.user.uid).update({
+                            team: ref.id
+                        }).then(result => {
+                            res.send('200: Success.');
+                            return;
+                        }).catch(err => {
+                            res.status(500).send('500: Internal server error.');
+                            return;
+                        })
+
+                    }).catch(err => {
+                        res.status(500).send('500: Internal server error.');
+                        return;
+                    });
+
+                } else {
+                    res.status(400).send('400: Name already taken.');
+                    return;
+                }
+            }).catch(err => {
+                res.status(500).send('500: Internal server error.');
+                return;
+            })
+        
+        } else {
+            res.status(403).send('403: You have not set your profile!');
+            return;
+        }
+    });
 });
 
 /**
- * GET /api/signup responds with the UI for the signup prompt.
+ * POST /api/joinTeam requires a team name and an access code that is
+ * to verify the correct team that the user is looking for and adds
+ * them to the team if they are not already in a team and they are participants.
  */
-app.get('/api/signUp', (req, res) => {
-    console.log('GET to /api/signUp');
-    res.sendFile(path.join(__dirname, 'schemas/login/signup-ui.html'));
+app.post('/api/joinTeam', [authenticate, bodyParser.json()], (req, res) => {
+    console.log('POST to /api/joinTeam');
+
+    // validate form
+    if (req.body.teamName == '' || req.body.accessCode == '') {
+        res.status(400).send("400: Invalid form data.");
+        return;
+    }
+
+    teamData.where('name', '==', req.body.teamName).get()
+    .then(querySnapshot => {
+
+        // if no team is found, send 404
+        if (querySnapshot.size == 0) {
+            res.status(404).send('404: Team not found.');
+            return;
+        }
+
+        // the forEach should only fire once; require unique names
+        querySnapshot.forEach(teamSnapshot => {
+            var teamDoc = teamSnapshot.data();
+
+            // if access code is valid, check user
+            if (teamDoc.accessCode == req.body.accessCode) {
+                var docRef = userData.doc(req.user.uid);
+                docRef.get().then(userSnapshot => {
+                    if (userSnapshot.exists) {
+                        var doc = userSnapshot.data();
+
+                        // user must be a participant
+                        if (doc.role != 'participant') {
+                            res.status(403).send('400: You cannot create a team as a mentor!');
+                        }
+
+                        // check that user is not in a team
+                        if (doc.team != null) {
+                            res.status(400).send('400: User is already in a team.');
+                            return;
+                        }
+
+                        // update the user's team data
+                        docRef.update({
+                            team: teamSnapshot.id
+                        }).then(result => {
+                            res.send('200: Success!');
+                            return;
+                        }).catch(err => {
+                            res.status().send('500: Internal server error.');
+                            return;
+                        });
+
+                    } else {
+                        // if no snapshot, user should create profile first
+                        res.status().send('403: Create your profile first!');
+                        return;
+                    }
+
+                }).catch(err => {
+                    res.status(500).send('500: Internal server error.');
+                    return;
+                });
+
+            } else {
+                // if invalid access code, deny access
+                res.status(403).send('403: Wrong access code.');
+                return;
+            }
+        })
+
+    }).catch(err => {
+        res.status(500).send('500: Internal server error.');
+        return;
+    });
 });
 
 /**
- * GET /api/forgotPassword sends the forgotPassword UI.
+ * DELETE /api/teams deletes the entire team if the owner of the team
+ * is calling this method; if a non-owner calls this method, then
+ * the user simply leaves the team.
  */
-app.get('/api/forgotPassword', (req, res) => {
-    console.log('GET to /forgotPassword')
-    res.sendFile(path.join(__dirname, 'schemas/login/forgot-password-ui.html'));
-});
+app.delete('/api/teams', authenticate, (req, res) => {
+    console.log('DELETE to /api/teams');
 
-/**
- * GET /api/resetPassword sends the resetPassword UI.
- */
-app.get('/api/resetPassword', (req, res) => {
-    console.log('GET to /resetPassword')
-    res.sendFile(path.join(__dirname, 'schemas/login/reset-password-ui.html'));
-});
+    var docRef = userData.doc(req.user.uid);
+    docRef.get().then(documentSnapshot => {
+        if (documentSnapshot.exists) {
+            var userDoc = documentSnapshot.data();
 
-/**
- * GET /api/emailSent sends the messages that shows that the verification email
- * has been sent.
- */
-app.get('/api/emailSent', (req, res) => {
-    console.log('GET to /emailSent')
-    res.sendFile(path.join(__dirname, 'schemas/status/email-sent.html'));
+            // user must be in a team to delete or leave 
+            if (userDoc.team == null) {
+                res.status(400).send('400: Cannot leave/delete a team if you\'re not in one!');
+                return;
+            }
+
+            // check if user is owner of team
+            var teamRef = teamData.doc(userDoc.team);
+            teamRef.get().then(teamSnapshot => {
+
+                if (teamSnapshot.exists) {
+                    var team = teamSnapshot.data();
+
+                    // if user is owner, remove everyone
+                    if (team.owner == req.user.uid) {
+                        userData.where('team', '==', userDoc.team).get()
+                        .then(snapshot => {
+                            var batch = firestore.batch();
+                            snapshot.forEach(doc => {
+                                batch.update(userData.doc(doc.id), 'team', admin.firestore.FieldValue.delete());
+                            });
+                            batch.delete(teamRef);
+
+                            batch.commit().then(result => {
+                                res.send('200: Success!');
+                                return;
+                            }).catch(err => {
+                                console.log(err);
+                                res.status(500).send('500: Internal server error.');
+                                return;
+                            });
+                        }).catch(err => {
+                            // failed to get data
+                            console.log(err);
+                            res.status(500).send('500: Internal server error.');
+                            return;
+                        });
+                    } else {
+                        docRef.update({
+                            team: admin.firestore.FieldValue.delete()
+                        }).then(result => {
+                            res.send('200: Success!');
+                            return;
+                        }).catch(err => {
+                            console.log(err);
+                            res.status(500).send('500: Internal server error.');
+                            return;
+                        });
+                    }
+                }
+
+            }).catch(err => {
+                // failed to get data
+                console.log(err);
+                res.status(500).send('500: Internal server error.');
+                return;
+            });
+        
+        } else {
+            res.status(403).send('403: You have not set your profile!');
+            return;
+        }
+    }).catch(err => {
+        res.status(500).send('500: Internal server error.');
+        return;
+    });;
 });
 
 app.listen(process.env.PORT || port, () => console.log(`App listening on port ${port}!`));
