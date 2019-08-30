@@ -62,8 +62,8 @@
                                 {
                                     "type": "img",
                                     "attrs": {
-                                        "id": "bam",
-                                        "src": "images/bam.svg"
+                                        "id": "asml",
+                                        "src": "images/asml.svg"
                                     },
                                     "data": []
                                 },
@@ -94,14 +94,6 @@
                                 {
                                     "type": "img",
                                     "attrs": {
-                                        "id": "gsk",
-                                        "src": "images/gsk.png"
-                                    },
-                                    "data": []
-                                },
-                                {
-                                    "type": "img",
-                                    "attrs": {
                                         "id": "google",
                                         "src": "images/google.svg"
                                     },
@@ -110,32 +102,8 @@
                                 {
                                     "type": "img",
                                     "attrs": {
-                                        "id": "liquidnet",
-                                        "src": "images/liquidnet.png"
-                                    },
-                                    "data": []
-                                },
-                                {
-                                    "type": "img",
-                                    "attrs": {
                                         "id": "microsoft",
                                         "src": "images/microsoft.svg"
-                                    },
-                                    "data": []
-                                },
-                                {
-                                    "type": "img",
-                                    "attrs": {
-                                        "id": "nutanix",
-                                        "src": "images/nutanix.svg"
-                                    },
-                                    "data": []
-                                },
-                                {
-                                    "type": "img",
-                                    "attrs": {
-                                        "id": "oracle",
-                                        "src": "images/oracle.svg"
                                     },
                                     "data": []
                                 },
@@ -154,7 +122,8 @@
                                         "src": "images/sandia.svg"
                                     },
                                     "data": []
-                                },{
+                                },
+                                {
                                     "type": "img",
                                     "attrs": {
                                         "id": "scm",
