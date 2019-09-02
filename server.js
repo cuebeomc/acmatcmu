@@ -10,9 +10,10 @@ const port = 3000;
 
 const uidgen = new UIDGenerator(40, UIDGenerator.BASE36);
 const andrewDomain = 'andrew.cmu.edu';
+const eduTLD = '.edu';
 
 var storage = multer.memoryStorage();
-var upload = multer({ 
+var upload = multer({
     storage: storage,
     limits: {
         fileSize: 5 * 1024 * 1024 // no larger than 5mb
@@ -64,9 +65,12 @@ async function authenticate(req, res, next) {
         req.user = decodedIdToken;
 
         var email = req.user.email;
-        var domain = email.replace(/.*@/, "");
+        var domain = email.replace(/.*@/, '');
 
-        if (domain != andrewDomain) {
+        var lastPeriod = domain.lastIndexOf('.');
+        var tld = domain.substring(lastPeriod);
+
+        if (lastPeriod < 0 || tld != eduTLD) {
             var data = {
                 statusMessage: 'INVALID',
                 todoMessage: 'You\'re not logged in using an Andrew email! Please log in/sign up with an Andrew email to continue.'
@@ -214,7 +218,7 @@ app.get('/api/status', authenticate, (req, res) => {
     if (!req.user.email_verified) {
         var data = {
             statusMessage: 'Not registered',
-            todoMessage: 'You\'re not done yet! Two more things to do; first, verify your AndrewID by clicking <div class="hover-button" onclick="sendVerification()">here.</div> <div id="email-message">&nbsp;</div>'
+            todoMessage: 'You\'re not done yet! Two more things to do; first, verify your email by clicking <div class="hover-button" onclick="sendVerification()">here.</div> <div id="email-message">&nbsp;</div>'
         }
 
         ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
@@ -364,10 +368,8 @@ function isIn(arr, str) {
  * no invalid data comes in.
  * 
  * A "valid" form (which results in an update/write) is as follows:
- *  1. the name/andrewid fields are not empty
+ *  1. the name field is not empty
  *  2. the given year and shirt size are valid years/shirt sizes
- *  3. if the user has verified their andrewID, additional edits to
- *     their profile will no longer change their andrewID.
  */
 app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => {
     console.log('POST to /api/profile');
@@ -380,7 +382,8 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
     }
 
     var email = req.user.email;
-    var andrewID = email.replace(/@.*$/,"");
+    var domain = email.replace(/.*@/, '');
+    var id = email.replace(/@.*$/, '');
 
     if (!req.user.email_verified) {
         res.status(403).send('403: Your email has not been verified!');
@@ -390,11 +393,16 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
     // baseline data that gets sent with every request
     var data = {
         name: req.body.name,
-        andrewID: andrewID,
         classYear: req.body.year,
         shirtSize: req.body.size,
-        role: req.body.role,
+        role: req.body.role
     };
+
+    if (domain == andrewDomain) {
+        data.andrewID = id;
+    } else {
+        data.ID = id;
+    }
 
     // now we check the database for the user's data
     userData.doc(req.user.uid).get()
@@ -497,7 +505,12 @@ app.get('/api/teams', authenticate, (req, res) => {
                         .then(snapshot => {
                             var andrewIDs = [];
                             snapshot.forEach(doc => {
-                                andrewIDs.push(doc.data().andrewID);
+                                var data = doc.data();
+                                if (data.andrewID != null) {
+                                    andrewIDs.push(data.andrewID);
+                                } else {
+                                    andrewIDs.push(data.ID);
+                                }
                             });
 
                             var data = {
