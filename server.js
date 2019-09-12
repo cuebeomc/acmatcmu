@@ -54,7 +54,7 @@ var validSizes = ['S', 'M', 'L', 'XL'];
 var validRoles = ['participant', 'mentor'];
 
 // add authentication middleware
-async function authenticate(req, res, next) {
+async function authUser(req, res, next) {
     if (!req.headers.authorization || !req.headers.authorization.startsWith('Bearer ')) {
         res.status(401).send('Unauthorized');
         return;
@@ -212,7 +212,7 @@ app.use('/dashboard', express.static(path.join(__dirname, 'public/dashboard')));
  * GET /api/status responds with the correct page depending on how far the
  * user is into the registration. requires authentication.
  */
-app.get('/api/status', authenticate, (req, res) => {
+app.get('/api/status', authUser, (req, res) => {
     console.log('GET to /api/status');
 
     if (!req.user.email_verified) {
@@ -236,7 +236,7 @@ app.get('/api/status', authenticate, (req, res) => {
         if (documentSnapshot.exists) {
             var data = {
                 statusMessage: "Registered",
-                todoMessage: "You're done! If you'd like to participate as a team, join or create a team in the Teams tab. We'll contact you once decisions are out."
+                todoMessage: "We're currently in the process of selecting participants. Until our decisions are out, you cannot create, join, or leave a team. We will release decisions earlier than Thursday, 11:59 PM."
             }
 
             ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
@@ -273,7 +273,7 @@ app.get('/api/status', authenticate, (req, res) => {
  * has no profile associated with it, or a "disabled" form filled with
  * user data that the user can then choose to edit
  */
-app.get('/api/profile', authenticate, (req, res) => {
+app.get('/api/profile', authUser, (req, res) => {
     console.log('GET to /api/profile');
 
     if (!req.user.email_verified) {
@@ -371,7 +371,7 @@ function isIn(arr, str) {
  *  1. the name field is not empty
  *  2. the given year and shirt size are valid years/shirt sizes
  */
-app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => {
+app.post('/api/profile', [authUser, upload.single('resume')], (req, res) => {
     console.log('POST to /api/profile');
 
     // validate data
@@ -476,7 +476,7 @@ app.post('/api/profile', [authenticate, upload.single('resume')], (req, res) => 
  * user is not in a team, and otherwise it shows the members
  * of the team that the user is in. 
  */
-app.get('/api/teams', authenticate, (req, res) => {
+app.get('/api/teams', authUser, (req, res) => {
     console.log('GET to /api/teams');
 
     // if email isn't verified, show error msg
@@ -563,8 +563,10 @@ app.get('/api/teams', authenticate, (req, res) => {
  * team name. The team name must not be empty and should be unique.
  * It generates an access code other users can use to join the team.
  */
-app.post('/api/teams', [authenticate, bodyParser.json()], (req, res) => {
+app.post('/api/teams', [authUser, bodyParser.json()], (req, res) => {
     console.log('POST to /api/teams');
+    res.status(401).send("Creating teams is currently locked.");
+    return;
 
     // validate form
     if (req.body.teamName == '') {
@@ -640,7 +642,7 @@ app.post('/api/teams', [authenticate, bodyParser.json()], (req, res) => {
  * to verify the correct team that the user is looking for and adds
  * them to the team if they are not already in a team and they are participants.
  */
-app.post('/api/joinTeam', [authenticate, bodyParser.json()], (req, res) => {
+app.post('/api/joinTeam', [authUser, bodyParser.json()], (req, res) => {
     console.log('POST to /api/joinTeam');
 
     // validate form
@@ -733,7 +735,7 @@ app.post('/api/joinTeam', [authenticate, bodyParser.json()], (req, res) => {
  * is calling this method; if a non-owner calls this method, then
  * the user simply leaves the team.
  */
-app.delete('/api/teams', authenticate, (req, res) => {
+app.delete('/api/teams', authUser, (req, res) => {
     console.log('DELETE to /api/teams');
 
     var docRef = userData.doc(req.user.uid);
