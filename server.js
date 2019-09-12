@@ -448,6 +448,9 @@ app.post('/api/profile', [authUser, upload.single('resume')], (req, res) => {
                 res.status(500).send('500: Internal server error.');
             })
         } else {
+            res.status(401).send("401: Creating your profile is currently locked.");
+            return;
+
             // otherwise, if no document stored for this user,
             // we set data; should not have any impact
             userData.doc(req.user.uid).set(data)
@@ -565,7 +568,7 @@ app.get('/api/teams', authUser, (req, res) => {
  */
 app.post('/api/teams', [authUser, bodyParser.json()], (req, res) => {
     console.log('POST to /api/teams');
-    res.status(401).send("Creating teams is currently locked.");
+    res.status(401).send("401: Creating teams is currently locked.");
     return;
 
     // validate form
@@ -644,6 +647,8 @@ app.post('/api/teams', [authUser, bodyParser.json()], (req, res) => {
  */
 app.post('/api/joinTeam', [authUser, bodyParser.json()], (req, res) => {
     console.log('POST to /api/joinTeam');
+    res.status(401).send("401: Joining teams is currently locked.");
+    return;
 
     // validate form
     if (req.body.teamName == '' || req.body.accessCode == '') {
@@ -737,6 +742,8 @@ app.post('/api/joinTeam', [authUser, bodyParser.json()], (req, res) => {
  */
 app.delete('/api/teams', authUser, (req, res) => {
     console.log('DELETE to /api/teams');
+    res.status(401).send("401: Leaving teams is currently locked.");
+    return;
 
     var docRef = userData.doc(req.user.uid);
     docRef.get().then(documentSnapshot => {
