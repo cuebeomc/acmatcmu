@@ -73,7 +73,7 @@ async function authUser(req, res, next) {
         if (lastPeriod < 0 || tld != eduTLD) {
             var data = {
                 statusMessage: 'INVALID',
-                todoMessage: 'You\'re not logged in using an Andrew email! Please log in/sign up with an Andrew email to continue.'
+                todoMessage: 'You\'re not logged in using a student email! Please log in/sign up with a student email to continue.'
             }
     
             ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
@@ -390,6 +390,8 @@ app.post('/api/profile', [authUser, upload.single('resume')], (req, res) => {
         return;
     }
 
+    // TODO: add checking CMU directory for major data
+
     // baseline data that gets sent with every request
     var data = {
         name: req.body.name,
@@ -448,8 +450,7 @@ app.post('/api/profile', [authUser, upload.single('resume')], (req, res) => {
                 res.status(500).send('500: Internal server error.');
             })
         } else {
-            res.status(401).send("401: Creating your profile is currently locked.");
-            return;
+            data.status = "late";
 
             // otherwise, if no document stored for this user,
             // we set data; should not have any impact
@@ -568,8 +569,6 @@ app.get('/api/teams', authUser, (req, res) => {
  */
 app.post('/api/teams', [authUser, bodyParser.json()], (req, res) => {
     console.log('POST to /api/teams');
-    res.status(401).send("401: Creating teams is currently locked.");
-    return;
 
     // validate form
     if (req.body.teamName == '') {
@@ -647,8 +646,6 @@ app.post('/api/teams', [authUser, bodyParser.json()], (req, res) => {
  */
 app.post('/api/joinTeam', [authUser, bodyParser.json()], (req, res) => {
     console.log('POST to /api/joinTeam');
-    res.status(401).send("401: Joining teams is currently locked.");
-    return;
 
     // validate form
     if (req.body.teamName == '' || req.body.accessCode == '') {
@@ -742,8 +739,6 @@ app.post('/api/joinTeam', [authUser, bodyParser.json()], (req, res) => {
  */
 app.delete('/api/teams', authUser, (req, res) => {
     console.log('DELETE to /api/teams');
-    res.status(401).send("401: Leaving teams is currently locked.");
-    return;
 
     var docRef = userData.doc(req.user.uid);
     docRef.get().then(documentSnapshot => {
