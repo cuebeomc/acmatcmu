@@ -234,9 +234,16 @@ app.get('/api/status', authUser, (req, res) => {
     var docRef = userData.doc(req.user.uid);
     docRef.get().then(documentSnapshot => {
         if (documentSnapshot.exists) {
+            var doc = documentSnapshot.data()
+
             var data = {
                 statusMessage: "Registered",
                 todoMessage: "Emails have been sent regarding statuses. Please check your email. If you have not received contact, contact us ASAP."
+            }
+
+            if (doc.status != null && doc.status == "late") {
+                data.statusMessage = "On waitlist";
+                data.todoMessage = "Thanks for registering late! Although we can't guarantee you a spot, please come to Rashid Auditorium at 5:45 for a chance to get off the waitlist."
             }
 
             ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
