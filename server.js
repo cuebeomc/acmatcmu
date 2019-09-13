@@ -236,7 +236,7 @@ app.get('/api/status', authUser, (req, res) => {
         if (documentSnapshot.exists) {
             var data = {
                 statusMessage: "Registered",
-                todoMessage: "We're currently in the process of selecting participants. Until our decisions are out, you cannot create, join, or leave a team. We will release decisions earlier than Thursday, 11:59 PM."
+                todoMessage: "Emails have been sent regarding statuses. Please check your email. If you have not received contact, contact us ASAP."
             }
 
             ejs.renderFile(path.join(__dirname, 'schemas/status/status.ejs'), data, (err, str) => {
