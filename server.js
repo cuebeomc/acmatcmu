@@ -206,7 +206,7 @@ app.get('/api/emailSent', (req, res) => {
 /**
  * GET /dashboard is for the "home" page of the login system
  */
-app.use('/dashboard', express.static(path.join(__dirname, 'public/dashboard')));
+//app.use('/dashboard', express.static(path.join(__dirname, 'public/dashboard')));
 
 /**
  * GET /api/status responds with the correct page depending on how far the
