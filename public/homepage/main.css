@@ -544,6 +544,11 @@ img#scm {
     width: 210px;
 }
 
+#olivia img {
+    width: auto;
+    height: 200px;
+}
+
 #check-later {
     padding-bottom: 40px;
 }
